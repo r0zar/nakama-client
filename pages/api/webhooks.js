@@ -41,6 +41,7 @@ const relevantEvents = new Set([
 ]);
 
 const webhookHandler = async (req, res) => {
+  console.log(req);
   if (req.method === 'POST') {
     const buf = await buffer(req);
     const sig = req.headers['stripe-signature'];
