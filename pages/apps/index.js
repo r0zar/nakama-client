@@ -1,5 +1,5 @@
-import { supabase } from '../utils/initSupabase';
-import Applications from '../components/Applications';
+import { supabase } from '../../utils/initSupabase';
+import Applications from '../../components/Applications';
 
 export default function AppsPage({ apps }) {
   return <Applications apps={apps} />;

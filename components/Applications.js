@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import { useRouter } from 'next/router';
+import { Router, useRouter } from 'next/router';
 import { useState } from 'react';
 import { postData } from '../utils/helpers';
 import { getStripe } from '../utils/initStripejs';
@@ -68,7 +68,7 @@ export default function Applications({ apps }) {
                     type="button"
                     disabled={session && !userLoaded}
                     loading={loading}
-                    onClick={() => console.log('go to app detail view')}
+                    onClick={() => router.push('/apps/1')}
                     className="mt-8 block w-full rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-gray-900"
                   >
                     Manage
