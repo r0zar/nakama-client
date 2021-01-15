@@ -46,7 +46,6 @@ export default function Applications({ apps }) {
         </div>
         <div className="mt-12 space-y-4 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mx-0 xl:grid-cols-4">
           {apps.map((app) => {
-            console.log(app);
             return (
               <div
                 key={app.id}
@@ -69,7 +68,7 @@ export default function Applications({ apps }) {
                     type="button"
                     disabled={session && !userLoaded}
                     loading={loading}
-                    onClick={() => handleCheckout(price.id)}
+                    onClick={() => console.log('go to app detail view')}
                     className="mt-8 block w-full rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-gray-900"
                   >
                     Manage
