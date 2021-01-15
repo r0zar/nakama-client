@@ -7,7 +7,6 @@ import { useUser } from '../components/UserContext';
 import Button from './ui/Button';
 
 export default function Pricing({ products }) {
-  console.log(products);
   const [billingInterval, setBillingInterval] = useState('month');
   const [loading, setLoading] = useState(false);
   const router = useRouter();

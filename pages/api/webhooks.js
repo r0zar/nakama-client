@@ -47,7 +47,6 @@ const webhookHandler = async (req, res) => {
     const webhookSecret =
       process.env.STRIPE_WEBHOOK_SECRET_LIVE ??
       process.env.STRIPE_WEBHOOK_SECRET;
-    console.log(sig, webhookSecret);
     let event;
 
     try {
