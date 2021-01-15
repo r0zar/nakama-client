@@ -26,6 +26,9 @@ const Navbar = () => {
               <Link href="/account">
                 <a className={s.link}>Account</a>
               </Link>
+              <Link href="/apps">
+                <a className={s.link}>Apps</a>
+              </Link>
             </nav>
           </div>
 
