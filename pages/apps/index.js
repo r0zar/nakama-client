@@ -1,13 +1,13 @@
-import { supabase } from '../../utils/initSupabase';
-import Applications from '../../components/Applications';
+import { supabase } from '../../utils/initSupabase'
+import Applications from '../../components/Applications'
 
-export default function AppsPage({ apps }) {
-  return <Applications apps={apps} />;
+export default function AppsPage ({ apps }) {
+  return <Applications apps={apps} />
 }
 
-export async function getStaticProps() {
-  const { data: apps, error } = await supabase.from('applications').select('*');
-  if (error) console.log(error.message);
+export async function getStaticProps () {
+  const { data: apps, error } = await supabase.from('applications').select('*')
+  if (error) console.log(error.message)
 
   return {
     props: {
@@ -15,5 +15,5 @@ export async function getStaticProps() {
     },
     // Refetch and rebuild pricing page every minute.
     revalidate: 60
-  };
+  }
 }
