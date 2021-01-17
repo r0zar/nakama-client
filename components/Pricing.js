@@ -16,13 +16,13 @@ export default function Pricing ({ products }) {
   useEffect(() => {
     const rect = ref.current.getBoundingClientRect()
     window.particlesJS.load('particles-js', '/particles.json', function () {
-      console.log('callback - particles.js config loaded')
       const canvas = document.getElementsByClassName(
         'particles-js-canvas-el'
       )[0]
       canvas.style.position = 'absolute'
       canvas.style.top = 0
       canvas.style.height = `${rect.height + rect.top + window.scrollY}px`
+      // canvas.height = rect.height + rect.top
     })
   }, [])
 
@@ -73,7 +73,7 @@ export default function Pricing ({ products }) {
   return (
     <section className="bg-black" id="particles-js" ref={ref}>
       <div className="max-w-6xl mx-auto py-8 sm:py-24 px-4 sm:px-6 lg:px-8">
-        <div className="sm:flex sm:flex-col sm:align-center">
+        <div className="sm:flex sm:flex-col sm:align-center z-10 relative">
           <h1 className="text-4xl font-extrabold text-white sm:text-center sm:text-6xl z-10">
             Pricing Plans
           </h1>
@@ -106,7 +106,7 @@ export default function Pricing ({ products }) {
             </button>
           </div>
         </div>
-        <div className="mt-12 space-y-4 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mx-0 xl:grid-cols-4">
+        <div className="mt-12 space-y-4 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mx-0 xl:grid-cols-4 z-10 relative">
           {products.map((product) => {
             const price = product.prices.find(
               (price) => price.interval === billingInterval
@@ -120,7 +120,7 @@ export default function Pricing ({ products }) {
               <div
                 key={product.id}
                 className={cn(
-                  'rounded-lg shadow-sm divide-y divide-accents-2 bg-primary-2 z-10',
+                  'rounded-lg shadow-sm divide-y divide-accents-2 bg-primary-2',
                   {
                     'border border-pink': subscription
                       ? product.name === subscription?.prices?.products.name
@@ -159,11 +159,11 @@ export default function Pricing ({ products }) {
           })}
         </div>
         <div>
-          <p className="mt-24 text-xs uppercase text-accents-3 text-center font-bold tracking-widest">
+          <p className="mt-24 text-xs uppercase text-accents-3 text-center font-bold tracking-widest z-10 relative">
             Brought to you by
           </p>
-          <div className="flex flex-col items-center my-12 space-y-4 sm:mt-8 sm:space-y-0 md:mx-auto md:max-w-2xl sm:grid sm:gap-6 sm:grid-cols-5">
-            <div className="flex items-center justify-start">
+          <div className="flex flex-col items-center my-12 space-y-4 sm:mt-8 sm:space-y-0 md:mx-auto md:max-w-2xl sm:grid sm:gap-6 sm:grid-cols-5 z-10">
+            <div className="flex items-center justify-start z-10">
               <a href="https://nextjs.org" aria-label="Next.js Link">
                 <img
                   src="/nextjs.svg"
@@ -172,7 +172,7 @@ export default function Pricing ({ products }) {
                 />
               </a>
             </div>
-            <div className="flex items-center justify-start">
+            <div className="flex items-center justify-start z-10">
               <a href="https://vercel.com" aria-label="Vercel.com Link">
                 <img
                   src="/vercel.svg"
@@ -181,7 +181,7 @@ export default function Pricing ({ products }) {
                 />
               </a>
             </div>
-            <div className="flex items-center justify-start">
+            <div className="flex items-center justify-start z-10">
               <a href="https://stripe.com" aria-label="stripe.com Link">
                 <img
                   src="/stripe.svg"
@@ -190,7 +190,7 @@ export default function Pricing ({ products }) {
                 />
               </a>
             </div>
-            <div className="flex items-center justify-start">
+            <div className="flex items-center justify-start z-10">
               <a href="https://supabase.io" aria-label="supabase.io Link">
                 <img
                   src="/supabase.svg"
@@ -199,7 +199,7 @@ export default function Pricing ({ products }) {
                 />
               </a>
             </div>
-            <div className="flex items-center justify-start">
+            <div className="flex items-center justify-start z-10">
               <a href="https://github.com" aria-label="github.com Link">
                 <img
                   src="/github.svg"
