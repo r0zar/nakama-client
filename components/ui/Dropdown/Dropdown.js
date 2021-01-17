@@ -1,32 +1,37 @@
-import cn from 'classnames';
-import React from 'react';
+import cn from 'classnames'
+import React from 'react'
 
-const Dropdown = () => {
-  const [hideDropdown, setHideDropdown] = React.useState(true);
-  const handleEventSourceSelection = () => setHideDropdown(!hideDropdown);
+const Dropdown = ({ onUpdate }) => {
+  const [hideDropdown, setHideDropdown] = React.useState(true)
+  const [selection, setSelection] = React.useState('this happens in Discord')
+  const handleEventSourceSelection = (e) => {
+    setSelection(e.target.text)
+    setHideDropdown(!hideDropdown)
+    onUpdate(e.target.value)
+  }
   return (
-    <div class="relative inline-block text-left w-full">
+    <div className="relative inline-block text-left w-full">
       <div>
         <button
           type="button"
-          class="inline-flex justify-between w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
+          className="inline-flex justify-between w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
           id="options-menu"
           aria-haspopup="true"
           aria-expanded="true"
           onClick={() => setHideDropdown(!hideDropdown)}
         >
-          When this happens in Discord...
+          When {selection}...
           <svg
-            class="-mr-1 ml-2 h-5 w-5"
+            className="-mr-1 ml-2 h-5 w-5"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"
             aria-hidden="true"
           >
             <path
-              fill-rule="evenodd"
+              fillRule="evenodd"
               d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-              clip-rule="evenodd"
+              clipRule="evenodd"
             />
           </svg>
         </button>
@@ -38,31 +43,31 @@ const Dropdown = () => {
         )}
       >
         <div
-          class="py-1"
+          className="py-1"
           role="menu"
           aria-orientation="vertical"
           aria-labelledby="options-menu"
         >
-          <a
-            href="#"
-            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+          <option
+            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-pointer"
             role="menuitem"
+            value="message"
             onClick={handleEventSourceSelection}
           >
             User posts a message
-          </a>
-          <a
-            href="#"
-            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+          </option>
+          <option
+            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900  cursor-pointer"
             role="menuitem"
+            value="enter"
             onClick={handleEventSourceSelection}
           >
             User enters the server
-          </a>
+          </option>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Dropdown;
+export default Dropdown

@@ -1,15 +1,15 @@
-import { supabase } from '../../../../../utils/initSupabase';
-import Event from '../../../../../components/Event';
+import { supabase } from '../../../../../utils/initSupabase'
+import Event from '../../../../../components/Event'
 
-export default function EventDetailPage({ event }) {
-  return <Event event={event} />;
+export default function EventDetailPage ({ event }) {
+  return <Event event={event} />
 }
 
-export async function getStaticProps(req) {
+export async function getStaticProps (req) {
   const { data: event, error } = await supabase
     .from('events')
-    .select(`* where id=${req.params.event_id}`);
-  if (error) console.log(error.message);
+    .select(`* where id=${req.params.event_id}`)
+  if (error) console.log(error.message)
 
   return {
     props: {
@@ -17,10 +17,10 @@ export async function getStaticProps(req) {
     },
     // Refetch and rebuild pricing page every minute.
     revalidate: 60
-  };
+  }
 }
 
-export async function getStaticPaths() {
+export async function getStaticPaths () {
   return {
     // Only `/posts/1` and `/posts/2` are generated at build time
     paths: [
@@ -30,5 +30,5 @@ export async function getStaticPaths() {
     // Enable statically generating additional pages
     // For example: `/posts/3`
     fallback: true
-  };
+  }
 }

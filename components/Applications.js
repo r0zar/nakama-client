@@ -1,18 +1,18 @@
-import cn from 'classnames';
-import { Router, useRouter } from 'next/router';
-import { useState } from 'react';
-import { postData } from '../utils/helpers';
-import { getStripe } from '../utils/initStripejs';
-import { useUser } from '../components/UserContext';
-import Button from './ui/Button';
+import cn from 'classnames'
+import { Router, useRouter } from 'next/router'
+import { useState } from 'react'
+import { postData } from '../utils/helpers'
+import { getStripe } from '../utils/initStripejs'
+import { useUser } from '../components/UserContext'
+import Button from './ui/Button'
 
-export default function Applications({ apps }) {
-  const [billingInterval, setBillingInterval] = useState('month');
-  const [loading, setLoading] = useState(false);
-  const router = useRouter();
-  const { session, userLoaded, subscription } = useUser();
+export default function Applications ({ apps }) {
+  const [billingInterval, setBillingInterval] = useState('month')
+  const [loading, setLoading] = useState(false)
+  const router = useRouter()
+  const { session, userLoaded, subscription } = useUser()
 
-  if (!apps.length)
+  if (!apps.length) {
     return (
       <section className="bg-black">
         <div className="max-w-6xl mx-auto py-8 sm:py-24 px-4 sm:px-6 lg:px-8">
@@ -31,7 +31,8 @@ export default function Applications({ apps }) {
           </p>
         </div>
       </section>
-    );
+    )
+  }
 
   return (
     <section className="bg-black">
@@ -75,10 +76,10 @@ export default function Applications({ apps }) {
                   </Button>
                 </div>
               </div>
-            );
+            )
           })}
         </div>
       </div>
     </section>
-  );
+  )
 }

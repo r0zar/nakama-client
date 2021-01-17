@@ -1,40 +1,54 @@
-import cn from 'classnames';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
-import { postData } from '../utils/helpers';
-import { getStripe } from '../utils/initStripejs';
-import { useUser } from '../components/UserContext';
-import Button from './ui/Button';
+import cn from 'classnames'
+import { useRouter } from 'next/router'
+import { useState, useEffect, useRef } from 'react'
+import { postData } from '../utils/helpers'
+import { getStripe } from '../utils/initStripejs'
+import { useUser } from '../components/UserContext'
+import Button from './ui/Button'
 
-export default function Pricing({ products }) {
-  const [billingInterval, setBillingInterval] = useState('month');
-  const [loading, setLoading] = useState(false);
-  const router = useRouter();
-  const { session, userLoaded, subscription } = useUser();
+export default function Pricing ({ products }) {
+  const [billingInterval, setBillingInterval] = useState('month')
+  const [loading, setLoading] = useState(false)
+  const router = useRouter()
+  const { session, userLoaded, subscription } = useUser()
+  const ref = useRef()
+
+  useEffect(() => {
+    const rect = ref.current.getBoundingClientRect()
+    window.particlesJS.load('particles-js', '/particles.json', function () {
+      console.log('callback - particles.js config loaded')
+      const canvas = document.getElementsByClassName(
+        'particles-js-canvas-el'
+      )[0]
+      canvas.style.position = 'absolute'
+      canvas.style.top = 0
+      canvas.style.height = `${rect.height + rect.top + window.scrollY}px`
+    })
+  }, [])
 
   const handleCheckout = async (price) => {
-    setLoading(true);
+    setLoading(true)
     if (!session) {
-      router.push('/signin');
-      return;
+      router.push('/signin')
+      return
     }
     if (subscription) {
-      router.push('/account');
-      return;
+      router.push('/account')
+      return
     }
     const { sessionId, error: apiError } = await postData({
       url: '/api/createCheckoutSession',
       data: { price },
       token: session.access_token
-    });
-    if (apiError) return alert(apiError.message);
-    const stripe = await getStripe();
-    const { error: stripeError } = stripe.redirectToCheckout({ sessionId });
-    if (stripeError) alert(error.message);
-    setLoading(false);
-  };
+    })
+    if (apiError) return alert(apiError.message)
+    const stripe = await getStripe()
+    const { error: stripeError } = stripe.redirectToCheckout({ sessionId })
+    if (stripeError) alert(stripeError.message)
+    setLoading(false)
+  }
 
-  if (!products.length)
+  if (!products.length) {
     return (
       <section className="bg-black">
         <div className="max-w-6xl mx-auto py-8 sm:py-24 px-4 sm:px-6 lg:px-8">
@@ -53,20 +67,21 @@ export default function Pricing({ products }) {
           </p>
         </div>
       </section>
-    );
+    )
+  }
 
   return (
-    <section className="bg-black">
+    <section className="bg-black" id="particles-js" ref={ref}>
       <div className="max-w-6xl mx-auto py-8 sm:py-24 px-4 sm:px-6 lg:px-8">
         <div className="sm:flex sm:flex-col sm:align-center">
-          <h1 className="text-4xl font-extrabold text-white sm:text-center sm:text-6xl">
+          <h1 className="text-4xl font-extrabold text-white sm:text-center sm:text-6xl z-10">
             Pricing Plans
           </h1>
-          <p className="mt-5 text-xl text-accents-6 sm:text-center sm:text-2xl max-w-2xl m-auto">
+          <p className="mt-5 text-xl text-accents-6 sm:text-center sm:text-2xl max-w-2xl m-auto z-10">
             Start building for free, then add a site plan to go live. Account
             plans unlock additional features.
           </p>
-          <div className="relative self-center mt-6 bg-primary-2 rounded-lg p-0.5 flex sm:mt-8 border border-accents-0">
+          <div className="relative self-center mt-6 bg-primary-2 rounded-lg p-0.5 flex sm:mt-8 border border-accents-0 z-10">
             <button
               onClick={() => setBillingInterval('month')}
               type="button"
@@ -95,12 +110,12 @@ export default function Pricing({ products }) {
           {products.map((product) => {
             const price = product.prices.find(
               (price) => price.interval === billingInterval
-            );
+            )
             const priceString = new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: price.currency,
               minimumFractionDigits: 0
-            }).format(price.unit_amount / 100);
+            }).format(price.unit_amount / 100)
             return (
               <div
                 key={product.id}
@@ -140,7 +155,7 @@ export default function Pricing({ products }) {
                   </Button>
                 </div>
               </div>
-            );
+            )
           })}
         </div>
         <div>
@@ -197,5 +212,5 @@ export default function Pricing({ products }) {
         </div>
       </div>
     </section>
-  );
+  )
 }

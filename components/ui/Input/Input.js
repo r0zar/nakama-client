@@ -1,18 +1,18 @@
-import React from 'react';
-import cn from 'classnames';
-import s from './Input.module.css';
+import React from 'react'
+import cn from 'classnames'
+import s from './Input.module.css'
 
 const Input = (props) => {
-  const { className, children, onChange, ...rest } = props;
+  const { className, children, onChange, ...rest } = props
 
-  const rootClassName = cn(s.root, {}, className);
+  const rootClassName = cn(s.root, {}, className)
 
   const handleOnChange = (e) => {
     if (onChange) {
-      onChange(e.target.value);
+      onChange(e.target.value)
     }
-    return null;
-  };
+    return null
+  }
 
   return (
     <label>
@@ -26,7 +26,7 @@ const Input = (props) => {
         {...rest}
       />
     </label>
-  );
-};
+  )
+}
 
-export default Input;
+export default Input
