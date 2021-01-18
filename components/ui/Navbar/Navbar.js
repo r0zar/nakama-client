@@ -5,7 +5,6 @@ import { useUser } from '../../UserContext'
 
 const Navbar = () => {
   const { user, signOut } = useUser()
-  console.log(!!user)
 
   return (
     <nav className={s.root}>
