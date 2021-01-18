@@ -6,7 +6,6 @@ export default function EventDetailPage ({ event }) {
 }
 
 export async function getStaticProps (req) {
-  console.log(req.params)
   const { data: event, error } = await supabase
     .from('events')
     .select('*')

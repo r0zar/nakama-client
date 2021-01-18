@@ -42,20 +42,37 @@ export const UserContextProvider = (props) => {
       .from('events')
       .update(event)
       .eq('id', event.id)
-    return data[0]
+      .single()
+    return data
   }
   const createEvent = async (id) => {
     const { data } = await supabase
       .from('events')
       .insert([{ application_id: id }])
-    return data[0]
+      .single()
+    return data
+  }
+
+  const getApplications = async () => {
+    const { data } = await supabase.from('applications').select('*')
+    return data
+  }
+
+  const getApplication = async (id) => {
+    const { data } = await supabase
+      .from('applications')
+      .select('*, events(*)')
+      .eq('id', id)
+      .single()
+    return data
   }
 
   const createApplication = async () => {
     const { data } = await supabase
       .from('applications')
       .insert([{ user_id: userDetails.id }])
-    return data[0]
+      .single()
+    return data
   }
 
   useEffect(() => {
@@ -85,6 +102,8 @@ export const UserContextProvider = (props) => {
     },
     updateEvent,
     createEvent,
+    getApplications,
+    getApplication,
     createApplication
   }
   return <UserContext.Provider value={value} {...props} />

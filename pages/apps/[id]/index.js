@@ -1,32 +1,17 @@
 import { supabase } from '../../../utils/initSupabase'
 import Application from '../../../components/Application'
+import { useUser } from '../../../components/UserContext'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 
-export default function AppDetailPage ({ app }) {
+export default function AppDetailPage () {
+  const router = useRouter()
+  const { getApplication } = useUser()
+  const [app, setApp] = useState([])
+  useEffect(() => {
+    getApplication(router.query.id).then((application) => {
+      setApp(application)
+    })
+  }, [router.query.id])
   return <Application app={app} />
-}
-
-export async function getStaticProps (req) {
-  const { data: app, error } = await supabase
-    .from('applications')
-    .select('*, events(*)')
-    .eq('id', req.params.id)
-  if (error) console.error(error.message)
-
-  return {
-    props: {
-      app: app[0] ?? {}
-    },
-    // Refetch and rebuild pricing page every minute.
-    revalidate: 60
-  }
-}
-
-export async function getStaticPaths () {
-  return {
-    // Only `/posts/1` and `/posts/2` are generated at build time
-    paths: [{ params: { id: '1' } }],
-    // Enable statically generating additional pages
-    // For example: `/posts/3`
-    fallback: true
-  }
 }

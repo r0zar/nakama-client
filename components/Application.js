@@ -36,33 +36,34 @@ export default function Application ({ app }) {
           </p>
         </div>
         <div className="mt-12 space-y-4 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mx-0 xl:grid-cols-4">
-          {app.events.map((event) => {
-            return (
-              <div
-                key={app.id}
-                className="rounded-lg shadow-sm divide-y divide-accents-2 bg-primary-2"
-              >
-                <div className="p-6">
-                  <h2 className="text-2xl leading-6 font-semibold text-white">
-                    {event.name}
-                  </h2>
-                  <p className="mt-4 text-accents-5">{event.description}</p>
-                  <Button
-                    variant="slim"
-                    type="button"
-                    disabled={session && !userLoaded}
-                    loading={loading}
-                    onClick={() =>
-                      router.push(`/apps/${app.id}/events/${event.id}`)
-                    }
-                    className="mt-8 block w-full rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-gray-900"
-                  >
-                    Configure
-                  </Button>
+          {app.events &&
+            app.events.map((event) => {
+              return (
+                <div
+                  key={app.id}
+                  className="rounded-lg shadow-sm divide-y divide-accents-2 bg-primary-2"
+                >
+                  <div className="p-6">
+                    <h2 className="text-2xl leading-6 font-semibold text-white">
+                      {event.name}
+                    </h2>
+                    <p className="mt-4 text-accents-5">{event.description}</p>
+                    <Button
+                      variant="slim"
+                      type="button"
+                      disabled={session && !userLoaded}
+                      loading={loading}
+                      onClick={() =>
+                        router.push(`/apps/${app.id}/events/${event.id}`)
+                      }
+                      className="mt-8 block w-full rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-gray-900"
+                    >
+                      Configure
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            )
-          })}
+              )
+            })}
           <div
             className={cn(
               'rounded-lg shadow-sm divide-y divide-accents-2 hover:bg-primary-2 cursor-pointer'

@@ -1,57 +1,57 @@
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { useUser } from '../components/UserContext';
-import LoadingDots from '../components/ui/LoadingDots';
-import Input from '../components/ui/Input';
-import Button from '../components/ui/Button';
-import Logo from '../components/icons/Logo';
-import GitHub from '../components/icons/GitHub';
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
+import { useUser } from '../components/UserContext'
+import LoadingDots from '../components/ui/LoadingDots'
+import Input from '../components/ui/Input'
+import Button from '../components/ui/Button'
+import Logo from '../components/icons/Logo'
+import GitHub from '../components/icons/GitHub'
 
 const SignIn = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPasswordInput, setShowPasswordInput] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState({ type: '', content: '' });
-  const router = useRouter();
-  const { user, signIn } = useUser();
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [showPasswordInput, setShowPasswordInput] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [message, setMessage] = useState({ type: '', content: '' })
+  const router = useRouter()
+  const { user, signIn } = useUser()
 
   const handleSignin = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    setLoading(true);
-    setMessage({});
+    setLoading(true)
+    setMessage({})
 
-    const { error } = await signIn({ email, password });
+    const { error } = await signIn({ email, password })
     if (error) {
-      setMessage({ type: 'error', content: error.message });
+      setMessage({ type: 'error', content: error.message })
     }
     if (!password) {
       setMessage({
         type: 'note',
         content: 'Check your email for the magic link.'
-      });
+      })
     }
-    setLoading(false);
-  };
+    setLoading(false)
+  }
 
   const handleOAuthSignIn = async (provider) => {
-    setLoading(true);
-    const { error } = await signIn({ provider });
+    setLoading(true)
+    const { error } = await signIn({ provider })
     if (error) {
-      setMessage({ type: 'error', content: error.message });
+      setMessage({ type: 'error', content: error.message })
     }
-    setLoading(false);
-  };
+    setLoading(false)
+  }
 
   useEffect(() => {
     if (user) {
-      router.replace('/account');
+      router.replace('/account')
     }
-  }, [user]);
+  }, [user])
 
-  if (!user)
+  if (!user) {
     return (
       <div className="w-80 flex flex-col justify-between p-3 max-w-lg m-auto my-64">
         <div className="flex justify-center pb-12 ">
@@ -123,9 +123,9 @@ const SignIn = () => {
               href="#"
               className="text-accents-7 text-accent-9 hover:underline cursor-pointer"
               onClick={() => {
-                if (showPasswordInput) setPassword('');
-                setShowPasswordInput(!showPasswordInput);
-                setMessage({});
+                if (showPasswordInput) setPassword('')
+                setShowPasswordInput(!showPasswordInput)
+                setMessage({})
               }}
             >
               {`Or sign in with ${
@@ -136,7 +136,7 @@ const SignIn = () => {
 
           <span className="pt-1 text-center text-sm">
             <span className="text-accents-7">Don't have an account?</span>
-            {` `}
+            {' '}
             <Link href="/signup">
               <a className="text-accent-9 font-bold hover:underline cursor-pointer">
                 Sign up.
@@ -167,13 +167,14 @@ const SignIn = () => {
           <span className="ml-2">Continue with GitHub</span>
         </Button>
       </div>
-    );
+    )
+  }
 
   return (
     <div className="m-6">
       <LoadingDots />
     </div>
-  );
-};
+  )
+}
 
-export default SignIn;
+export default SignIn
