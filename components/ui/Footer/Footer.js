@@ -1,9 +1,9 @@
-import Link from 'next/link';
-import Logo from '../../icons/Logo';
-import GitHub from '../../icons/GitHub';
-import s from './Footer.module.css';
+import Link from 'next/link'
+import Logo from '../../icons/Logo'
+import GitHub from '../../icons/GitHub'
+import s from './Footer.module.css'
 
-export default function Footer() {
+export default function Footer () {
   return (
     <footer className="mx-auto max-w-8xl px-6 bg-primary-2">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 border-b border-accents-2 py-12 text-primary transition-colors duration-150 bg-primary-2">
@@ -13,7 +13,7 @@ export default function Footer() {
               <span className="rounded-full border border-gray-700 mr-2">
                 <Logo />
               </span>
-              <span>ACME</span>
+              <span>handle.events</span>
             </a>
           </Link>
         </div>
@@ -86,7 +86,7 @@ export default function Footer() {
       </div>
       <div className="py-12 flex flex-col md:flex-row justify-between items-center space-y-4 bg-primary-2">
         <div>
-          <span>&copy; 2020 ACME, Inc. All rights reserved.</span>
+          <span>&copy; 2020 Point Blank Dev LLC. All rights reserved.</span>
         </div>
         <div className="flex items-center">
           <span className="text-primary">Crafted by</span>
@@ -100,5 +100,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  );
+  )
 }
