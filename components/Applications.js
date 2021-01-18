@@ -12,22 +12,13 @@ export default function Applications ({ apps }) {
   const router = useRouter()
   const { session, userLoaded, subscription, createApplication } = useUser()
 
-  if (!apps.length) {
+  if (!session) {
     return (
       <section className="bg-black">
         <div className="max-w-6xl mx-auto py-8 sm:py-24 px-4 sm:px-6 lg:px-8">
           <div className="sm:flex sm:flex-col sm:align-center"></div>
-          <p className="text-6xl font-extrabold text-white sm:text-center sm:text-6xl">
-            No subscription pricing plans found. Create them in your{' '}
-            <a
-              className="text-pink underline"
-              href="https://dashboard.stripe.com/products"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              Stripe Dashboard
-            </a>
-            .
+          <p className="text-3xl font-extrabold text-white sm:text-center sm:text-3xl">
+            Sign in to get started.
           </p>
         </div>
       </section>

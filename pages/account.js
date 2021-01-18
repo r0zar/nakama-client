@@ -1,12 +1,12 @@
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
-import { postData } from '../utils/helpers';
-import { useUser } from '../components/UserContext';
-import LoadingDots from '../components/ui/LoadingDots';
-import Button from '../components/ui/Button';
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useState, useEffect } from 'react'
+import { postData } from '../utils/helpers'
+import { useUser } from '../components/UserContext'
+import LoadingDots from '../components/ui/LoadingDots'
+import Button from '../components/ui/Button'
 
-function Card({ title, description, footer, children }) {
+function Card ({ title, description, footer, children }) {
   return (
     <div className="border border-accents-1	max-w-3xl w-full p rounded-md m-auto my-8">
       <div className="px-5 py-4">
@@ -18,36 +18,36 @@ function Card({ title, description, footer, children }) {
         {footer}
       </div>
     </div>
-  );
+  )
 }
-export default function Account() {
-  const [loading, setLoading] = useState(false);
-  const router = useRouter();
-  const { userLoaded, user, session, userDetails, subscription } = useUser();
+export default function Account () {
+  const [loading, setLoading] = useState(false)
+  const router = useRouter()
+  const { userLoaded, user, session, userDetails, subscription } = useUser()
 
   useEffect(() => {
-    if (!user) router.replace('/signin');
-  }, [user]);
+    if (!user) router.replace('/signin')
+  }, [user])
 
   const redirectToCustomerPortal = async () => {
-    setLoading(true);
+    setLoading(true)
     const { url, error } = await postData({
       url: '/api/createPortalLink',
       token: session.access_token
-    });
-    if (error) return alert(error.message);
-    window.location.assign(url);
-    setLoading(false);
-  };
+    })
+    if (error) return alert(error.message)
+    window.location.assign(url)
+    setLoading(false)
+  }
 
-  const subscriptionName = subscription && subscription.prices.products.name;
+  const subscriptionName = subscription && subscription.prices.products.name
   const subscriptionPrice =
     subscription &&
     new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: subscription.prices.currency,
       minimumFractionDigits: 0
-    }).format(subscription.prices.unit_amount / 100);
+    }).format(subscription.prices.unit_amount / 100)
 
   return (
     <section className="bg-black mb-32">
@@ -85,17 +85,21 @@ export default function Account() {
           }
         >
           <div className="text-xl mt-8 mb-4 font-semibold">
-            {!userLoaded ? (
+            {!userLoaded
+              ? (
               <div className="h-12 mb-6">
                 <LoadingDots />
               </div>
-            ) : subscriptionPrice ? (
+                )
+              : subscriptionPrice
+                ? (
               `${subscriptionPrice}/${subscription.prices.interval}`
-            ) : (
+                  )
+                : (
               <Link href="/">
                 <a>Choose your plan</a>
               </Link>
-            )}
+                  )}
           </div>
         </Card>
         <Card
@@ -104,13 +108,15 @@ export default function Account() {
           footer={<p>Please use 64 characters at maximum.</p>}
         >
           <div className="text-xl mt-8 mb-4 font-semibold">
-            {userDetails ? (
+            {userDetails
+              ? (
               `${userDetails?.full_name ?? ''}`
-            ) : (
+                )
+              : (
               <div className="h-8 mb-6">
                 <LoadingDots />
               </div>
-            )}
+                )}
           </div>
         </Card>
         <Card
@@ -124,5 +130,5 @@ export default function Account() {
         </Card>
       </div>
     </section>
-  );
+  )
 }

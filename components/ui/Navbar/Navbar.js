@@ -5,6 +5,7 @@ import { useUser } from '../../UserContext'
 
 const Navbar = () => {
   const { user, signOut } = useUser()
+  console.log(!!user)
 
   return (
     <nav className={s.root}>
@@ -26,9 +27,11 @@ const Navbar = () => {
               <Link href="/account">
                 <a className={s.link}>Account</a>
               </Link>
-              <Link href="/apps">
-                <a className={s.link}>Apps</a>
-              </Link>
+              {!!user && (
+                <Link href="/apps">
+                  <a className={s.link}>Apps</a>
+                </Link>
+              )}
             </nav>
           </div>
 
