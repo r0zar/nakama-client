@@ -7,7 +7,7 @@ export default function AppsPage ({ apps }) {
 
 export async function getStaticProps () {
   const { data: apps, error } = await supabase.from('applications').select('*')
-  if (error) console.log(error.message)
+  if (error) console.error(error.message)
 
   return {
     props: {

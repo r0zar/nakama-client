@@ -9,7 +9,6 @@ import Button from './ui/Dropdown'
 import Input from './ui/Input'
 
 export default function Event ({ event }) {
-  console.log(event)
   const [loading, setLoading] = useState(false)
   const router = useRouter()
   const { session, userLoaded, subscription, updateEvent } = useUser()
@@ -56,7 +55,7 @@ export default function Event ({ event }) {
             />
           </div>
         </div>
-        <div className="p-4 rounded-lg shadow-sm divide-y divide-accents-2 bg-primary-2 float-right w-max">
+        <div className="p-4 rounded-lg shadow-sm divide-y divide-accents-2 hover:bg-primary-2 cursor-pointer float-right w-max">
           <button onClick={saveEvent}>Save</button>
         </div>
       </div>

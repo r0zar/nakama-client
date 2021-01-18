@@ -8,8 +8,9 @@ export default function AppDetailPage ({ app }) {
 export async function getStaticProps (req) {
   const { data: app, error } = await supabase
     .from('applications')
-    .select(`*, events(*) where id=${req.params.id}`)
-  if (error) console.log(error.message)
+    .select('*, events(*)')
+    .eq('id', req.params.id)
+  if (error) console.error(error.message)
 
   return {
     props: {

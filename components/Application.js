@@ -7,10 +7,9 @@ import { useUser } from './UserContext'
 import Button from './ui/Button'
 
 export default function Application ({ app }) {
-  console.log(app)
   const [loading, setLoading] = useState(false)
   const router = useRouter()
-  const { session, userLoaded, subscription } = useUser()
+  const { session, userLoaded, subscription, createEvent } = useUser()
 
   if (!app) {
     return (
@@ -53,7 +52,9 @@ export default function Application ({ app }) {
                     type="button"
                     disabled={session && !userLoaded}
                     loading={loading}
-                    onClick={() => router.push(`/apps/${app.id}/events/1`)}
+                    onClick={() =>
+                      router.push(`/apps/${app.id}/events/${event.id}`)
+                    }
                     className="mt-8 block w-full rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-gray-900"
                   >
                     Configure
@@ -62,6 +63,33 @@ export default function Application ({ app }) {
               </div>
             )
           })}
+          <div
+            className={cn(
+              'rounded-lg shadow-sm divide-y divide-accents-2 hover:bg-primary-2 cursor-pointer'
+            )}
+            onClick={async (e) => {
+              try {
+                const newEvent = await createEvent(app.id)
+                router.push(`/apps/${app.id}/events/${newEvent.id}`)
+              } catch (e) {
+                console.error(e)
+              }
+            }}
+          >
+            <div className="p-12">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </div>
+          </div>
         </div>
       </div>
     </section>

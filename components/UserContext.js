@@ -37,7 +37,26 @@ export const UserContextProvider = (props) => {
       .in('status', ['trialing', 'active'])
       .single()
 
-  const updateEvent = async (event) => supabase.from('events').update(event)
+  const updateEvent = async (event) => {
+    const { data } = await supabase
+      .from('events')
+      .update(event)
+      .eq('id', event.id)
+    return data[0]
+  }
+  const createEvent = async (id) => {
+    const { data } = await supabase
+      .from('events')
+      .insert([{ application_id: id }])
+    return data[0]
+  }
+
+  const createApplication = async () => {
+    const { data } = await supabase
+      .from('applications')
+      .insert([{ user_id: userDetails.id }])
+    return data[0]
+  }
 
   useEffect(() => {
     if (user) {
@@ -64,7 +83,9 @@ export const UserContextProvider = (props) => {
       setSubscription(null)
       return supabase.auth.signOut()
     },
-    updateEvent
+    updateEvent,
+    createEvent,
+    createApplication
   }
   return <UserContext.Provider value={value} {...props} />
 }

@@ -6,9 +6,11 @@ export default function EventDetailPage ({ event }) {
 }
 
 export async function getStaticProps (req) {
+  console.log(req.params)
   const { data: event, error } = await supabase
     .from('events')
-    .select(`* where id=${req.params.event_id}`)
+    .select('*')
+    .eq('id', req.params.event_id)
   if (error) console.log(error.message)
 
   return {

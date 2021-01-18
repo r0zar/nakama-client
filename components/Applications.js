@@ -10,7 +10,7 @@ export default function Applications ({ apps }) {
   const [billingInterval, setBillingInterval] = useState('month')
   const [loading, setLoading] = useState(false)
   const router = useRouter()
-  const { session, userLoaded, subscription } = useUser()
+  const { session, userLoaded, subscription, createApplication } = useUser()
 
   if (!apps.length) {
     return (
@@ -69,7 +69,7 @@ export default function Applications ({ apps }) {
                     type="button"
                     disabled={session && !userLoaded}
                     loading={loading}
-                    onClick={() => router.push('/apps/1')}
+                    onClick={() => router.push(`/apps/${app.id}`)}
                     className="mt-8 block w-full rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-gray-900"
                   >
                     Manage
@@ -78,6 +78,33 @@ export default function Applications ({ apps }) {
               </div>
             )
           })}
+          <div
+            className={cn(
+              'rounded-lg shadow-sm divide-y divide-accents-2 hover:bg-primary-2 cursor-pointer'
+            )}
+            onClick={async (e) => {
+              try {
+                const newApp = await createApplication()
+                router.push(`/apps/${newApp.id}`)
+              } catch (e) {
+                console.error(e)
+              }
+            }}
+          >
+            <div className="p-12">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </div>
+          </div>
         </div>
       </div>
     </section>
