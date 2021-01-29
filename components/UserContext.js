@@ -1,4 +1,5 @@
 import { useEffect, useState, createContext, useContext } from 'react'
+import { postData } from '../utils/helpers'
 import { supabase } from '../utils/initSupabase'
 
 export const UserContext = createContext()
@@ -76,10 +77,19 @@ export const UserContextProvider = (props) => {
   }
 
   const updateApplication = async (app) => {
+    // Update backend
     const { data } = await supabase
       .from('applications')
       .update(app)
       .eq('id', app.id)
+
+    // Sync bot service
+    const response = await postData({
+      url: '/api/syncronize',
+      token: session.access_token,
+      data: { id: app.id }
+    })
+    console.log(response)
     return data
   }
 
