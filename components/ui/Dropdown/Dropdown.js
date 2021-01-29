@@ -1,9 +1,16 @@
 import cn from 'classnames'
 import React from 'react'
+import _ from 'lodash'
 
-const Dropdown = ({ onUpdate }) => {
+const Dropdown = ({ defaultSelection, onUpdate }) => {
+  const options = {
+    message: 'User posts a message',
+    enter: 'User enters the server'
+  }
   const [hideDropdown, setHideDropdown] = React.useState(true)
-  const [selection, setSelection] = React.useState('this happens in Discord')
+  const [selection, setSelection] = React.useState(
+    options[defaultSelection] || 'this happens in Discord'
+  )
   const handleEventSourceSelection = (e) => {
     setSelection(e.target.text)
     setHideDropdown(!hideDropdown)
@@ -48,22 +55,19 @@ const Dropdown = ({ onUpdate }) => {
           aria-orientation="vertical"
           aria-labelledby="options-menu"
         >
-          <option
-            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-pointer"
-            role="menuitem"
-            value="message"
-            onClick={handleEventSourceSelection}
-          >
-            User posts a message
-          </option>
-          <option
-            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900  cursor-pointer"
-            role="menuitem"
-            value="enter"
-            onClick={handleEventSourceSelection}
-          >
-            User enters the server
-          </option>
+          {_.map(options, (option, key) => {
+            return (
+              <option
+                key={key}
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-pointer"
+                role="menuitem"
+                value="message"
+                onClick={handleEventSourceSelection}
+              >
+                {option}
+              </option>
+            )
+          })}
         </div>
       </div>
     </div>

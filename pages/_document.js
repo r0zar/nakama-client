@@ -9,6 +9,12 @@ class MyDocument extends Document {
           type="text/javascript"
           src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"
         ></script>
+        <script
+          src="https://kit.fontawesome.com/70c9e17067.js"
+          crossOrigin="anonymous"
+        ></script>
+        <script type="text/javascript" src="/zest/settings.js"></script>
+        <script type="text/javascript" src="/zest/start.js"></script>
         <body className="loading">
           <Main />
           <NextScript />

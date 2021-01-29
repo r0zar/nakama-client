@@ -75,6 +75,19 @@ export const UserContextProvider = (props) => {
     return data
   }
 
+  const updateApplication = async (app) => {
+    const { data } = await supabase
+      .from('applications')
+      .update(app)
+      .eq('id', app.id)
+    return data
+  }
+
+  const deleteApplication = async (id) => {
+    await supabase.from('events').delete().eq('application_id', id)
+    await supabase.from('applications').delete().eq('id', id)
+  }
+
   useEffect(() => {
     if (user) {
       Promise.allSettled([getUserDetails(), getSubscription()]).then(
@@ -104,7 +117,9 @@ export const UserContextProvider = (props) => {
     createEvent,
     getApplications,
     getApplication,
-    createApplication
+    createApplication,
+    updateApplication,
+    deleteApplication
   }
   return <UserContext.Provider value={value} {...props} />
 }
