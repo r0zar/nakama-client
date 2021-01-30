@@ -44,6 +44,15 @@ export const UserContextProvider = (props) => {
       .update(event)
       .eq('id', event.id)
       .single()
+
+    console.log(event)
+
+    // Sync bot service
+    await postData({
+      url: '/api/syncronize',
+      token: session.access_token,
+      data: { id: event.application_id }
+    })
     return data
   }
   const createEvent = async (id) => {

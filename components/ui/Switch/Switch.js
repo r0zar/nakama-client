@@ -9,16 +9,22 @@ const Switch = ({ onChange, defaultChecked = false }) => {
   }
   return (
     <div
-      className={`w-16 h-10 flex items-center shadow-md rounded-full p-1 ${
-        checked ? 'bg-green' : 'bg-gray-300'
+      className={`w-24 flex items-center shadow-md rounded-sm p-1 transform duration-700 ease-in-out ${
+        checked ? 'bg-green glow' : 'bg-gray-300'
       }`}
       onClick={toggle}
     >
       <div
-        className={`bg-white w-8 h-8 rounded-full shadow-md transform duration-100 ease-in-out ${
-          checked && 'translate-x-6'
+        className={`text-gray-900 flex justify-center align-middle bg-white w-8 h-full rounded-sm shadow-md transform duration-200 ease-out ${
+          checked && 'translate-x-14'
         }`}
-      />
+      >
+        <i
+          className={`fas fa-${
+            checked ? 'bolt text-gray-900' : 'power-off'
+          } self-center text-gray-300 transform duration-1000 ease-out`}
+        ></i>
+      </div>
     </div>
   )
 }

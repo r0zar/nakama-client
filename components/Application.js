@@ -73,13 +73,6 @@ export default function Application ({ app }) {
               <i className="fas fa-edit p-2 text-gray-600 hover:text-gray-200 transform duration-200 ease-in-out"></i>
             </button>
           </div>
-          <label className="self-end">
-            off / on
-            <Switch
-              onChange={(e) => enableApp(e)}
-              defaultChecked={app.enabled}
-            />
-          </label>
           <p className="mt-5 text-xl text-accents-6 sm:text-center sm:text-2xl max-w-2xl m-auto">
             {app.provider}
           </p>
@@ -142,10 +135,20 @@ export default function Application ({ app }) {
           </div>
         </div>
         <div className="mt-8 m-1 flex justify-between">
-          <Button className="justify-self-start" onClick={deleteApp}>
-            <i className="fas fa-trash text-red"></i>
-          </Button>
-          <Button onClick={() => router.back()}>Back</Button>
+          <div>
+            <Button className="justify-self-start" onClick={deleteApp}>
+              <i className="fas fa-trash text-red"></i>
+            </Button>
+          </div>
+          <div className="flex">
+            <Button className="mr-8" onClick={() => router.back()}>
+              Back
+            </Button>
+            <Switch
+              onChange={(e) => enableApp(e)}
+              defaultChecked={app.enabled}
+            />
+          </div>
         </div>
       </div>
     </section>

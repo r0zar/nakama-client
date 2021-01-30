@@ -5,7 +5,7 @@ import { postData } from '../utils/helpers'
 import { getStripe } from '../utils/initStripejs'
 import { useUser } from './UserContext'
 import Dropdown from './ui/Dropdown'
-import Button from './ui/Dropdown'
+import Button from './ui/Button'
 import Input from './ui/Input'
 import Switch from './ui/Switch'
 
@@ -20,12 +20,20 @@ export default function Event ({ event }) {
     event.key = e
   }
 
-  const saveEvent = () => {
-    updateEvent(event)
+  const updateEventName = async () => {
+    await updateEvent({
+      id: event.id,
+      name,
+      application_id: event.application_id
+    })
   }
 
-  const updateEventName = async () => {
-    await updateEvent({ id: event.id, name })
+  const enableEvent = async (e) => {
+    await updateEvent({
+      id: event.id,
+      enabled: e,
+      application_id: event.application_id
+    })
   }
 
   console.log(event)
@@ -70,13 +78,6 @@ export default function Event ({ event }) {
               <i className="fas fa-edit p-2 text-gray-600 hover:text-gray-200 transform duration-200 ease-in-out"></i>
             </button>
           </div>
-          <label className="self-end">
-            off / on
-            <Switch
-              onChange={(e) => (event.enabled = e)}
-              defaultChecked={event.enabled}
-            />
-          </label>
           <p className="mt-5 text-xl text-accents-6 sm:text-center sm:text-2xl max-w-2xl m-auto">
             {event.description}
           </p>
@@ -93,12 +94,13 @@ export default function Event ({ event }) {
           </div>
         </div>
         <div className="p-4 float-right flex">
-          <div className="p-4 rounded-lg shadow-sm divide-y divide-accents-2 hover:bg-primary-2 cursor-pointer w-max">
-            <button onClick={() => router.back()}>Back</button>
-          </div>
-          <div className="p-4 rounded-lg shadow-sm divide-y divide-accents-2 hover:bg-primary-2 cursor-pointer w-max">
-            <button onClick={saveEvent}>Save</button>
-          </div>
+          <Button className="mr-8" onClick={() => router.back()}>
+            Back
+          </Button>
+          <Switch
+            onChange={(e) => enableEvent(e)}
+            defaultChecked={event.enabled}
+          />
         </div>
       </div>
     </section>
