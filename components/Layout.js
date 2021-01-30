@@ -6,8 +6,8 @@ import Footer from './ui/Footer'
 export default function Layout ({ children, meta: pageMeta }) {
   const router = useRouter()
   const meta = {
-    title: 'Next.js Subscription Starter',
-    description: 'Brought to you by Vercel, Stripe, and Supabase.',
+    title: 'Serverless Socket Events',
+    description: 'A no code solution for websockets.',
     cardImage: '/og.png',
     ...pageMeta
   }
@@ -38,7 +38,9 @@ export default function Layout ({ children, meta: pageMeta }) {
         <meta name="twitter:image" content={meta.cardImage} />
       </Head>
       <Navbar />
-      <div id="skip">{children}</div>
+      <div id="skip" className="flex-grow">
+        {children}
+      </div>
       <Footer />
     </>
   )
