@@ -40,6 +40,8 @@ const Button = forwardRef((props, buttonRef) => {
     className
   )
 
+  console.log(children)
+
   return (
     <Component
       aria-pressed={active}

@@ -69,7 +69,7 @@ export default function Applications ({ apps }) {
               </div>
             )
           })}
-          <div
+          <Button
             className={cn(
               'rounded-lg shadow-sm divide-y divide-accents-2 hover:bg-primary-2 cursor-pointer'
             )}
@@ -82,11 +82,13 @@ export default function Applications ({ apps }) {
               }
             }}
           >
-            <div className="p-12">
+            <div className="p-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
                 fill="currentColor"
+                height="102px"
+                width="102px"
               >
                 <path
                   fillRule="evenodd"
@@ -95,7 +97,7 @@ export default function Applications ({ apps }) {
                 />
               </svg>
             </div>
-          </div>
+          </Button>
         </div>
       </div>
     </section>

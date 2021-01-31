@@ -1,1 +1,5 @@
 @import './Switch.css';
+
+.root:hover * {
+  @apply bg-accents-1 text-white;
+}
