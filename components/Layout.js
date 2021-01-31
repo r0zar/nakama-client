@@ -27,7 +27,7 @@ export default function Layout ({ children, meta: pageMeta }) {
           content={`https://subscription-starter.vercel.app${router.asPath}`}
         />
         <meta property="og:type" content="website" />
-        <meta property="og:site_name" content={meta.title} />
+        <meta property="og:site_name" content="handle.events" />
         <meta property="og:description" content={meta.description} />
         <meta property="og:title" content={meta.title} />
         <meta property="og:image" content={meta.cardImage} />
