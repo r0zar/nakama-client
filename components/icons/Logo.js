@@ -1,21 +1,19 @@
 const Logo = ({ className = '', ...props }) => (
-  <svg
-    width="32"
-    height="32"
-    viewBox="0 0 32 32"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    className={className}
-    {...props}
-  >
-    <rect width="100%" height="100%" rx="16" fill="var(--secondary)" />
-    <path
-      fillRule="evenodd"
-      clipRule="evenodd"
-      d="M17.6482 10.1305L15.8785 7.02583L7.02979 22.5499H10.5278L17.6482 10.1305ZM19.8798 14.0457L18.11 17.1983L19.394 19.4511H16.8453L15.1056 22.5499H24.7272L19.8798 14.0457Z"
-      fill="var(--primary)"
-    />
+  <svg width="32" height="32">
+    <g fill="var(--secondary)">
+      <path
+        d="M0 0 c-135 -67 -141 -79 -63 -122 62 -42 130 -46 172 -9 28 23
+31 41 22 111 -3 16 4 21 34 23 20 2 50 -4 66 -12 29 -15 30 -15 25 4 -3 11
+-19 31 -35 45 -47 40 -88 34 -221 -32z m88 -39 c35 -36 -16 -100 -74 -90 -33
+5 -71 31 -71 48 0 10 97 58 117 58 6 0 19 -7 28 -16z"
+      />
+      <path
+        d="M0 0 c2 -19 9 -107 15 -184 21 -293 -13 -457 -124 -600 l-30
+-38 33 17 c48 25 116 96 145 152 48 95 61 158 59 293 -1 141 -22 242 -73 345
+-27 53 -30 56 -25 25z"
+      />
+    </g>
   </svg>
-);
+)
 
-export default Logo;
+export default Logo
