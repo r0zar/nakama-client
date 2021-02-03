@@ -2,7 +2,7 @@ import cn from 'classnames'
 import React from 'react'
 import _ from 'lodash'
 
-const Dropdown = ({ defaultSelection, onUpdate }) => {
+const Dropdown = ({ defaultSelection, onChange }) => {
   const options = {
     message: 'User posts a message',
     enter: 'User enters the server'
@@ -14,7 +14,7 @@ const Dropdown = ({ defaultSelection, onUpdate }) => {
   const handleEventSourceSelection = (e) => {
     setSelection(e.target.text)
     setHideDropdown(!hideDropdown)
-    onUpdate(e.target.value)
+    onChange(e.target.value)
   }
   return (
     <div className="relative inline-block text-left w-full">

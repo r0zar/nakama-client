@@ -78,8 +78,8 @@ export default function Pricing ({ products }) {
             Pricing Plans
           </h1>
           <p className="mt-5 text-xl text-accents-6 sm:text-center sm:text-2xl max-w-2xl m-auto z-10">
-            Start building for free, then add a site plan to go live. Account
-            plans unlock additional features.
+            Subscribe to get started with serverless websockets. Larger plans
+            have higher websocket usage quotas.
           </p>
           <div className="relative self-center mt-6 bg-primary-2 rounded-lg p-0.5 flex sm:mt-8 border border-accents-0 z-10">
             <button
@@ -93,17 +93,23 @@ export default function Pricing ({ products }) {
             >
               Monthly billing
             </button>
-            <button
-              onClick={() => setBillingInterval('year')}
-              type="button"
-              className={`${
-                billingInterval === 'year'
-                  ? 'relative w-1/2 bg-accents-1 border-accents-0 shadow-sm text-white'
-                  : 'ml-0.5 relative w-1/2 border border-transparent text-accents-4'
-              } rounded-md m-1 py-2 text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-pink focus:ring-opacity-50 focus:z-10 sm:w-auto sm:px-8`}
-            >
-              Yearly billing
-            </button>
+            {products.find((p) =>
+              p.prices.find((price) => price.billingInterval === 'year')
+            )
+              ? (
+              <button
+                onClick={() => setBillingInterval('year')}
+                type="button"
+                className={`${
+                  billingInterval === 'year'
+                    ? 'relative w-1/2 bg-accents-1 border-accents-0 shadow-sm text-white'
+                    : 'ml-0.5 relative w-1/2 border border-transparent text-accents-4'
+                } rounded-md m-1 py-2 text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-pink focus:ring-opacity-50 focus:z-10 sm:w-auto sm:px-8`}
+              >
+                Yearly billing
+              </button>
+                )
+              : null}
           </div>
         </div>
         <div className="mt-12 space-y-4 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mx-0 xl:grid-cols-4 z-10 relative">
@@ -133,6 +139,12 @@ export default function Pricing ({ products }) {
                     {product.name}
                   </h2>
                   <p className="mt-4 text-accents-5">{product.description}</p>
+                  <p className="mt-8 text-accents-5">
+                    <span className="text-3xl font-extrabold white">
+                      3 applications
+                    </span>
+                  </p>
+                  <p className="mt-0 text-accents-5">60 wss events / minute</p>
                   <p className="mt-8">
                     <span className="text-5xl font-extrabold white">
                       {priceString}

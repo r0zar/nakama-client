@@ -16,8 +16,18 @@ export default function Event ({ event }) {
   const [name, setName] = useState()
   const { session, userLoaded, subscription, updateEvent } = useUser()
 
-  const setEvent = (e) => {
-    event.key = e
+  const setKey = (key) => {
+    updateEvent({
+      id: event.id,
+      key: key
+    })
+  }
+
+  const setWebhookURL = (url) => {
+    updateEvent({
+      id: event.id,
+      webhook_url: url
+    })
   }
 
   const updateEventName = async () => {
@@ -36,7 +46,6 @@ export default function Event ({ event }) {
     })
   }
 
-  console.log(event)
   if (!event) {
     return (
       <section className="bg-black">
@@ -84,12 +93,13 @@ export default function Event ({ event }) {
         </div>
         <div className="my-12 space-y-4 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mx-0 xl:grid-cols-2">
           <div className="p-4 rounded-lg shadow-sm divide-y divide-accents-2 bg-primary-2">
-            <Dropdown defaultSelection={event.key} onUpdate={setEvent} />
+            <Dropdown defaultSelection={event.key} onChange={setKey} />
           </div>
           <div className="p-4 rounded-lg shadow-sm divide-y divide-accents-2 bg-primary-2">
             <Input
               placeholder="https://send-a-webhook-to-this-url.com"
               defaultValue={event.webhook_url}
+              onBlur={setWebhookURL}
             />
           </div>
         </div>

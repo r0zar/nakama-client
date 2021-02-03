@@ -57,7 +57,7 @@ export default function Account () {
             Account
           </h1>
           <p className="mt-5 text-xl text-accents-6 sm:text-center sm:text-2xl max-w-2xl m-auto">
-            We partnered with Stripe for a simplified billing.
+            Manage your personal information here.
           </p>
         </div>
       </div>
