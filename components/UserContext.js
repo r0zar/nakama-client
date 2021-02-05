@@ -91,12 +91,11 @@ export const UserContextProvider = (props) => {
       .eq('id', app.id)
 
     // Sync bot service
-    const response = await postData({
+    await postData({
       url: '/api/syncronize',
       token: session.access_token,
       data: { id: app.id }
-    })
-    console.log(response)
+    }).catch(console.error)
     return data
   }
 

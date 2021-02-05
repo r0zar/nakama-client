@@ -16,7 +16,6 @@ export default function AppsPage () {
 
 export async function getServerSideProps () {
   const { data: apps, error } = await supabase.from('applications').select('*')
-  console.log(apps)
   if (error) console.error(error.message)
 
   return {

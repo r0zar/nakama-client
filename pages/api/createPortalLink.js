@@ -8,7 +8,6 @@ const createPortalLink = async (req, res) => {
     const token = req.headers.token
     try {
       const { data: user, error } = await supabaseAdmin.auth.api.getUser(token)
-      console.log(user)
       if (error) throw error
 
       const customer = await createOrRetrieveCustomer({
@@ -23,7 +22,6 @@ const createPortalLink = async (req, res) => {
 
       return res.status(200).json({ url })
     } catch (err) {
-      console.log(err)
       res.status(500).json({ error: { statusCode: 500, message: err.message } })
     }
   } else {

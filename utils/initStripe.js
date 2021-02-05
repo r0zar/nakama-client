@@ -1,4 +1,4 @@
-import Stripe from 'stripe';
+import Stripe from 'stripe'
 
 const stripe = new Stripe(
   process.env.STRIPE_SECRET_KEY_LIVE ?? process.env.STRIPE_SECRET_KEY,
@@ -12,6 +12,6 @@ const stripe = new Stripe(
       version: '0.1.0'
     }
   }
-);
+)
 
-export { stripe };
+export { stripe }

@@ -36,6 +36,7 @@ export default function Pricing ({ products }) {
       router.push('/account')
       return
     }
+
     const { sessionId, error: apiError } = await postData({
       url: '/api/createCheckoutSession',
       data: { price },

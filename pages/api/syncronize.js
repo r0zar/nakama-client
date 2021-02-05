@@ -11,7 +11,6 @@ const syncronize = async (req, res) => {
       .select('*')
       .eq('id', req.body.id)
       .single()
-    console.log(req.body)
 
     // Authorize request to this application
     if (user.id !== application.user_id) return
