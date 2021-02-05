@@ -5,6 +5,8 @@ import { postData } from '../utils/helpers'
 import { useUser } from '../components/UserContext'
 import LoadingDots from '../components/ui/LoadingDots'
 import Button from '../components/ui/Button'
+import Input from '../components/ui/Input/Input'
+import _ from 'lodash'
 
 function Card ({ title, description, footer, children }) {
   return (
@@ -85,21 +87,11 @@ export default function Account () {
           }
         >
           <div className="text-xl mt-8 mb-4 font-semibold">
-            {!userLoaded
-              ? (
-              <div className="h-12 mb-6">
-                <LoadingDots />
-              </div>
-                )
-              : subscriptionPrice
-                ? (
-              `${subscriptionPrice}/${subscription.prices.interval}`
-                  )
-                : (
-              <Link href="/">
-                <a>Choose your plan</a>
-              </Link>
-                  )}
+            <PlanField
+              userLoaded={userLoaded}
+              subscriptionPrice={subscriptionPrice}
+              subscription={subscription}
+            />
           </div>
         </Card>
         <Card
@@ -108,15 +100,7 @@ export default function Account () {
           footer={<p>Please use 64 characters at maximum.</p>}
         >
           <div className="text-xl mt-8 mb-4 font-semibold">
-            {userDetails
-              ? (
-              `${userDetails?.full_name ?? ''}`
-                )
-              : (
-              <div className="h-8 mb-6">
-                <LoadingDots />
-              </div>
-                )}
+            <NameField userLoaded={userLoaded} userDetails={userDetails} />
           </div>
         </Card>
         <Card
@@ -131,4 +115,45 @@ export default function Account () {
       </div>
     </section>
   )
+}
+
+const PlanField = ({ userLoaded, subscriptionPrice, subscription }) => {
+  if (!userLoaded) {
+    return (
+      <div className="h-12 mb-6">
+        <LoadingDots />
+      </div>
+    )
+  }
+  if (subscriptionPrice) {
+    return `${subscriptionPrice}/${subscription.prices.interval}`
+  }
+  return (
+    <Link href="/">
+      <a>Choose your plan</a>
+    </Link>
+  )
+}
+
+const NameField = ({ userLoaded, userDetails }) => {
+  const { updateUser } = useUser()
+
+  const setName = (n) => {
+    updateUser({
+      id: userDetails.id,
+      full_name: n
+    })
+  }
+
+  if (!userLoaded) {
+    return (
+      <div className="h-12 mb-6">
+        <LoadingDots />
+      </div>
+    )
+  }
+  if (!_.isEmpty(userDetails?.full_name)) {
+    return userDetails?.full_name
+  }
+  return <Input onBlur={setName} />
 }

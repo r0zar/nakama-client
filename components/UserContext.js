@@ -21,7 +21,6 @@ export const UserContextProvider = (props) => {
         setUser(session?.user ?? null)
       }
     )
-
     return () => {
       authListener.unsubscribe()
     }
@@ -29,6 +28,11 @@ export const UserContextProvider = (props) => {
 
   // Get the user details.
   const getUserDetails = () => supabase.from('users').select('*').single()
+
+  // Update the user details in the backend.
+  const updateUser = async (user) => {
+    await supabase.from('users').update(user).eq('id', user.id).single()
+  }
 
   // Get the user's trialing or active subscription.
   const getSubscription = () =>
@@ -108,6 +112,7 @@ export const UserContextProvider = (props) => {
     if (user) {
       Promise.allSettled([getUserDetails(), getSubscription()]).then(
         (results) => {
+          console.log(results)
           setUserDetails(results[0].value.data)
           setSubscription(results[1].value.data)
           setUserLoaded(true)
@@ -129,6 +134,7 @@ export const UserContextProvider = (props) => {
       setSubscription(null)
       return supabase.auth.signOut()
     },
+    updateUser,
     updateEvent,
     createEvent,
     getApplications,

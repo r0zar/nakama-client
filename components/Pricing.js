@@ -14,16 +14,18 @@ export default function Pricing ({ products }) {
   const ref = useRef()
 
   useEffect(() => {
-    const rect = ref.current.getBoundingClientRect()
-    window.particlesJS.load('particles-js', '/particles.json', function () {
-      const canvas = document.getElementsByClassName(
-        'particles-js-canvas-el'
-      )[0]
-      canvas.style.position = 'absolute'
-      canvas.style.top = 0
-      canvas.style.height = `${rect.height + rect.top + window.scrollY}px`
-      // canvas.height = rect.height + rect.top
-    })
+    try {
+      const rect = ref.current.getBoundingClientRect()
+      window.particlesJS.load('particles-js', '/particles.json', function () {
+        const canvas = document.getElementsByClassName(
+          'particles-js-canvas-el'
+        )[0]
+        canvas.style.position = 'absolute'
+        canvas.style.top = 0
+        canvas.style.height = `${rect.height + rect.top + window.scrollY}px`
+        // canvas.height = rect.height + rect.top
+      })
+    } catch (error) {}
   }, [])
 
   const handleCheckout = async (price) => {

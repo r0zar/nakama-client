@@ -8,7 +8,6 @@ const Input = (props) => {
   const rootClassName = cn(s.root, {}, className)
 
   const handleOnChange = (e) => {
-    console.log(e)
     if (onChange) {
       onChange(e.target.value)
     }

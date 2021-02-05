@@ -4,7 +4,7 @@ import Logo from '../../icons/Logo'
 import { useUser } from '../../UserContext'
 
 const Navbar = () => {
-  const { user, signOut } = useUser()
+  const { user, signOut, subscription } = useUser()
 
   return (
     <nav className={s.root}>
@@ -26,7 +26,7 @@ const Navbar = () => {
               <Link href="/account">
                 <a className={s.link}>Account</a>
               </Link>
-              {!!user && (
+              {!!user && subscription && (
                 <Link href="/apps">
                   <a className={s.link}>Apps</a>
                 </Link>

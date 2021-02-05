@@ -1,32 +1,32 @@
-import { stripe } from '../../utils/initStripe';
+import { stripe } from '../../utils/initStripe'
 import {
   upsertProductRecord,
   upsertPriceRecord,
   manageSubscriptionStatusChange
-} from '../../utils/useDatabase';
+} from '../../utils/useDatabase'
 
 // Stripe requires the raw body to construct the event.
 export const config = {
   api: {
     bodyParser: false
   }
-};
+}
 
 const buffer = (req) => {
   return new Promise((resolve, reject) => {
-    const body = [];
+    const body = []
     req
       .on('data', (chunk) => {
-        body.push(chunk);
+        body.push(chunk)
       })
       .on('end', () => {
-        resolve(Buffer.concat(body));
+        resolve(Buffer.concat(body))
       })
       .on('error', (err) => {
-        reject(err);
-      });
-  });
-};
+        reject(err)
+      })
+  })
+}
 
 // TODO: deleted events and tax rate events?
 const relevantEvents = new Set([
@@ -38,23 +38,23 @@ const relevantEvents = new Set([
   'customer.subscription.created',
   'customer.subscription.updated',
   'customer.subscription.deleted'
-]);
+])
 
 const webhookHandler = async (req, res) => {
   if (req.method === 'POST') {
-    const buf = await buffer(req);
-    const sig = req.headers['stripe-signature'];
+    const buf = await buffer(req)
+    const sig = req.headers['stripe-signature']
     const webhookSecret =
       process.env.STRIPE_WEBHOOK_SECRET_LIVE ??
-      process.env.STRIPE_WEBHOOK_SECRET;
-    let event;
+      process.env.STRIPE_WEBHOOK_SECRET
+    let event
 
     try {
-      event = stripe.webhooks.constructEvent(buf, sig, webhookSecret);
+      event = stripe.webhooks.constructEvent(buf, sig, webhookSecret)
     } catch (err) {
       // On error, log and return the error message.
-      console.log(`❌ Error message: ${err.message}`);
-      return res.status(400).send(`Webhook Error: ${err.message}`);
+      console.log(`❌ Error message: ${err.message}`)
+      return res.status(400).send(`Webhook Error: ${err.message}`)
     }
 
     if (relevantEvents.has(event.type)) {
@@ -62,12 +62,12 @@ const webhookHandler = async (req, res) => {
         switch (event.type) {
           case 'product.created':
           case 'product.updated':
-            await upsertProductRecord(event.data.object);
-            break;
+            await upsertProductRecord(event.data.object)
+            break
           case 'price.created':
           case 'price.updated':
-            await upsertPriceRecord(event.data.object);
-            break;
+            await upsertPriceRecord(event.data.object)
+            break
           case 'customer.subscription.created':
           case 'customer.subscription.updated':
           case 'customer.subscription.deleted':
@@ -75,34 +75,34 @@ const webhookHandler = async (req, res) => {
               event.data.object.id,
               event.data.object.customer,
               event.type === 'customer.subscription.created'
-            );
-            break;
+            )
+            break
           case 'checkout.session.completed':
-            const checkoutSession = event.data.object;
+            const checkoutSession = event.data.object
             if (checkoutSession.mode === 'subscription') {
-              const subscriptionId = checkoutSession.subscription;
+              const subscriptionId = checkoutSession.subscription
               await manageSubscriptionStatusChange(
                 subscriptionId,
                 checkoutSession.customer,
                 true
-              );
+              )
             }
-            break;
+            break
           default:
-            throw new Error('Unhandled relevant event!');
+            throw new Error('Unhandled relevant event!')
         }
       } catch (error) {
-        console.log(error);
-        return res.json({ error: 'Webhook handler failed. View logs.' });
+        console.log(error)
+        return res.json({ error: 'Webhook handler failed. View logs.' })
       }
     }
 
     // Return a response to acknowledge receipt of the event.
-    res.json({ received: true });
+    res.json({ received: true })
   } else {
-    res.setHeader('Allow', 'POST');
-    res.status(405).end('Method Not Allowed');
+    res.setHeader('Allow', 'POST')
+    res.status(405).end('Method Not Allowed')
   }
-};
+}
 
-export default webhookHandler;
+export default webhookHandler
