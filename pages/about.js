@@ -15,7 +15,7 @@ const About = () => {
     If you have any suggestions, I'd love to hear them.
   `
   const text5 = `
-    Thanks.
+    Thank you.
   `
   return (
     <div className="w-auto p-3 max-w-2xl m-auto my-64">
