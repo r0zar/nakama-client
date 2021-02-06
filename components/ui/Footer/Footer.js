@@ -74,17 +74,9 @@ export default function Footer () {
         <div>
           <span>
             &copy; 2020{' '}
-            <a
-              href="https://pointblankdev.com"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Point Blank Dev LLC
-            </a>
-            . All rights reserved. Created by{' '}
-            <a href="https://rossragsdale.com" target="_blank" rel="noreferrer">
-              Ross Ragsdale
-            </a>
+            <Link href="https://pointblankdev.com">Point Blank Dev LLC</Link>.
+            All rights reserved. Created by{' '}
+            <Link href="https://rossragsdale.com">Ross Ragsdale</Link>.
           </span>
         </div>
       </div>
