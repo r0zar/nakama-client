@@ -10,7 +10,6 @@ export default function Application ({ app }) {
   const [loading] = useState(false)
   const [editMode, setEditMode] = useState(false)
   const [name, setName] = useState('')
-  const [token, setToken] = useState('')
   const router = useRouter()
   const {
     session,
@@ -28,9 +27,10 @@ export default function Application ({ app }) {
     await updateApplication({ id: app.id, name })
   }
 
-  const updateToken = async () => {
-    await updateApplication({ id: app.id, token })
+  const updateToken = async (t) => {
+    await updateApplication({ id: app.id, token: t })
   }
+
   const deleteApp = async () => {
     await deleteApplication(app.id)
     router.back()
@@ -83,9 +83,8 @@ export default function Application ({ app }) {
           <p className="mt-5 text-xl text-accents-6 sm:text-center sm:text-2xl max-w-2xl m-auto">
             <Input
               type="text"
-              defaultValue={token || app.token}
-              onChange={setToken}
-              onBlur={updateToken}
+              defaultValue={app.token}
+              onChange={updateToken}
             ></Input>
           </p>
         </div>
