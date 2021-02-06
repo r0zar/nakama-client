@@ -8,7 +8,7 @@ const Subnav = ({ app }) => {
   return (
     <nav className={s.root}>
       <div className="mx-auto max-w-6xl px-6">
-        {user && (
+        {user && app && (
           <div className="flex justify-between align-center flex-row py-2 relative z-10">
             <div className="flex flex-1 items-center">
               <nav className="space-x-2 hidden lg:block">

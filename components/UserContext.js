@@ -65,6 +65,10 @@ export const UserContextProvider = (props) => {
     return data
   }
 
+  const deleteEvent = async (id) => {
+    await supabase.from('events').delete().eq('id', id)
+  }
+
   const getApplications = async () => {
     const { data } = await supabase.from('applications').select('*')
     return data
@@ -136,6 +140,7 @@ export const UserContextProvider = (props) => {
     updateUser,
     updateEvent,
     createEvent,
+    deleteEvent,
     getApplications,
     getApplication,
     createApplication,

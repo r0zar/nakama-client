@@ -2,20 +2,18 @@ import cn from 'classnames'
 import React from 'react'
 import _ from 'lodash'
 
-const Dropdown = ({ defaultSelection, onChange }) => {
-  const options = {
-    message: 'User posts a message',
-    enter: 'User enters the server'
-  }
+const Dropdown = ({ defaultSelection, onChange, options }) => {
   const [hideDropdown, setHideDropdown] = React.useState(true)
   const [selection, setSelection] = React.useState(
-    options[defaultSelection] || 'this happens in Discord'
+    options[defaultSelection] || 'this happens in the app'
   )
+
   const handleEventSourceSelection = (e) => {
     setSelection(e.target.text)
     setHideDropdown(!hideDropdown)
     onChange(e.target.value)
   }
+
   return (
     <div className="relative inline-block text-left w-full">
       <div>
@@ -45,7 +43,7 @@ const Dropdown = ({ defaultSelection, onChange }) => {
       </div>
       <div
         className={cn(
-          'origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5',
+          'origin-top-right absolute right-0 mt-2 w-80 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5',
           { invisible: hideDropdown }
         )}
       >
@@ -61,7 +59,7 @@ const Dropdown = ({ defaultSelection, onChange }) => {
                 key={key}
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-pointer"
                 role="menuitem"
-                value="message"
+                value={key}
                 onClick={handleEventSourceSelection}
               >
                 {option}

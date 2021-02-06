@@ -2,6 +2,7 @@ import cn from 'classnames'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { useUser } from '../components/UserContext'
+import Webhook from './icons/Webhook'
 import Button from './ui/Button'
 
 export default function Applications ({ apps }) {
@@ -34,42 +35,14 @@ export default function Applications ({ apps }) {
           </p>
         </div>
         <div className="mt-12 space-y-4 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mx-0 xl:grid-cols-4">
-          {apps.map((app) => {
-            return (
-              <div
-                key={app.id}
-                className={cn(
-                  'rounded-lg shadow-sm divide-y divide-accents-2 bg-primary-2',
-                  {
-                    'border border-pink': subscription
-                      ? app.name === subscription?.prices?.products.name
-                      : app.name === 'Freelancer'
-                  }
-                )}
-              >
-                <div className="p-6">
-                  <h2 className="text-2xl leading-6 font-semibold text-white">
-                    {app.name}
-                  </h2>
-                  <p className="mt-4 text-accents-5">{app.description}</p>
-                  <Button
-                    variant="slim"
-                    type="button"
-                    disabled={session && !userLoaded}
-                    loading={loading}
-                    onClick={() => router.push(`/apps/${app.id}`)}
-                    className="mt-8 block w-full rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-gray-900"
-                  >
-                    Manage
-                  </Button>
-                </div>
-              </div>
-            )
-          })}
+          {apps.map((app) => (
+            <ApplicationCard app={app} key={app.id} />
+          ))}
           <Button
             className={cn(
               'rounded-lg shadow-sm divide-y divide-accents-2 hover:bg-primary-2 cursor-pointer'
             )}
+            style={{ borderRadius: '0.5rem' }}
             onClick={async (e) => {
               try {
                 const newApp = await createApplication()
@@ -98,5 +71,33 @@ export default function Applications ({ apps }) {
         </div>
       </div>
     </section>
+  )
+}
+
+const ApplicationCard = ({ app, sub }) => {
+  const router = useRouter()
+
+  return (
+    <div className="p-6 bg-primary-2 rounded-lg">
+      <h2 className="text-2xl leading-6 font-semibold text-white">
+        {app.name}
+      </h2>
+      <div className="flex items-center justify-around p-2 my-4">
+        <i
+          className="fab fa-discord m-1 text-6xl"
+          style={{ color: '#7289da' }}
+        ></i>
+        <Webhook size={64} />
+      </div>
+      <p className="m-2 text-accents-5">{app.description}</p>
+      <Button
+        variant="slim"
+        type="button"
+        onClick={() => router.push(`/apps/${app.id}`)}
+        className="block w-full rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-gray-900"
+      >
+        Manage
+      </Button>
+    </div>
   )
 }

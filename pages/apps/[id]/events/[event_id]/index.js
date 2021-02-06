@@ -1,5 +1,5 @@
+import Event from '../../../../../components/event'
 import { supabase } from '../../../../../utils/initSupabase'
-import Event from '../../../../../components/Event'
 
 export default function EventDetailPage ({ event }) {
   return <Event event={event} />

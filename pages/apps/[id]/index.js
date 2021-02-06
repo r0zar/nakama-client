@@ -1,7 +1,7 @@
-import Application from '../../../components/Application'
 import { useUser } from '../../../components/UserContext'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import Application from '../../../components/application'
 
 export default function AppDetailPage () {
   const router = useRouter()
