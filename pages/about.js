@@ -22,10 +22,10 @@ const About = () => {
       <div className="flex flex-col justify-center pb-12 ">
         <h1 className="text-2xl my-4">About</h1>
         <p className="font-thin text-5xl my-4">{text1}</p>
-        <p className="font-fine my-1">{text2}</p>
-        <p className="font-fine my-1">{text3}</p>
-        <p className="font-fine my-1">{text4}</p>
-        <p className="font-thin text-lg my-1">{text5}</p>
+        <p className="font-fine my-2">{text2}</p>
+        <p className="font-fine my-2">{text3}</p>
+        <p className="font-fine my-2">{text4}</p>
+        <p className="font-thin text-lg my-2">{text5}</p>
       </div>
     </div>
   )
