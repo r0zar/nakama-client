@@ -34,6 +34,7 @@ export default function Application ({ app }) {
       {!isEmpty(app) && (
         <div className="max-w-6xl mx-auto py-2 px-4 sm:px-6 lg:px-8">
           <AppTitle app={app} />
+          <AppProvider app={app} />
           <div className="mt-12 space-y-4 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mx-0 xl:grid-cols-4">
             {app.events &&
               app.events.map((event) => {
@@ -150,9 +151,15 @@ const AppTitle = ({ app }) => {
           <i className="fas fa-edit p-2 text-gray-600 hover:text-gray-200 transform duration-200 ease-in-out"></i>
         </button>
       </div>
-      <p className="mt-5 text-xl text-accents-6 sm:text-center sm:text-2xl max-w-2xl m-auto">
-        {app.provider}
-      </p>
+    </div>
+  )
+}
+
+const AppProvider = ({ app }) => {
+  return (
+    <div className="flex items-center text-accents-4 text-2xl my-1">
+      <i className="fab fa-discord m-1"></i>
+      <p className="m-1 font-fine max-w-2xl">{app.provider}</p>
     </div>
   )
 }
