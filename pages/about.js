@@ -3,17 +3,16 @@ const About = () => {
     Hi I'm Ross 👋
   `
   const text2 = `
-    handle.events has a simple mission to make working with websockets more accessible.
+    handle.events has a simple mission to make working with web sockets more accessible.
   `
   const text3 = `
-    Creating a persistant connection to a websocket host requires a server to run 24/7,
-    so there arn't many serverless options to accomplish that goal. I looked for a no-code
-    solution for this problem I didn't find out, so I made build it.
+    Creating a persistent connection to a web socket host requires a server to run 24/7.
+    I looked for a no-code solution for this problem I didn't find out, so I made build it.
   `
   const text4 = `    
     Give handle.events a try and let me know what you think. 
-    I'm working hard to add support for more websocket hosts and event handlers,
-    so if you have any suggestions, I'd love to hear them!
+    I'm working to more web socket hosts and event handlers. 
+    If you have any suggestions, I'd love to hear them!
   `
   const text5 = `
     Thank you!
