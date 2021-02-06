@@ -142,12 +142,14 @@ export default function Pricing ({ products }) {
                     {product.name}
                   </h2>
                   <p className="mt-4 text-accents-5">{product.description}</p>
-                  <p className="mt-8 text-accents-5">
-                    <span className="text-3xl font-extrabold white">
-                      3 applications
+                  <p className="mt-8">
+                    <span className="mr-1 text-5xl font-extrabold white">
+                      60
+                    </span>
+                    <span className="text-base font-thin text-accents-8">
+                      events / minute
                     </span>
                   </p>
-                  <p className="mt-0 text-accents-5">60 wss events / minute</p>
                   <p className="mt-8">
                     <span className="text-5xl font-extrabold white">
                       {priceString}

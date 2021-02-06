@@ -9,7 +9,8 @@ import Input from './ui/Input'
 export default function Application ({ app }) {
   const [loading] = useState(false)
   const [editMode, setEditMode] = useState(false)
-  const [name, setName] = useState()
+  const [name, setName] = useState('')
+  const [token, setToken] = useState('')
   const router = useRouter()
   const {
     session,
@@ -27,6 +28,9 @@ export default function Application ({ app }) {
     await updateApplication({ id: app.id, name })
   }
 
+  const updateToken = async () => {
+    await updateApplication({ id: app.id, token })
+  }
   const deleteApp = async () => {
     await deleteApplication(app.id)
     router.back()
@@ -75,6 +79,14 @@ export default function Application ({ app }) {
           </div>
           <p className="mt-5 text-xl text-accents-6 sm:text-center sm:text-2xl max-w-2xl m-auto">
             {app.provider}
+          </p>
+          <p className="mt-5 text-xl text-accents-6 sm:text-center sm:text-2xl max-w-2xl m-auto">
+            <Input
+              type="text"
+              defaultValue={token || app.token}
+              onChange={setToken}
+              onBlur={updateToken}
+            ></Input>
           </p>
         </div>
         <div className="mt-12 space-y-4 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mx-0 xl:grid-cols-4">

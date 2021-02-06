@@ -118,7 +118,7 @@ const SignIn = () => {
             </form>
           )}
 
-          <span className="pt-1 text-center text-sm">
+          {/* <span className="pt-1 text-center text-sm">
             <a
               href="#"
               className="text-accents-7 text-accent-9 hover:underline cursor-pointer"
@@ -132,11 +132,10 @@ const SignIn = () => {
                 showPasswordInput ? 'magic link' : 'password'
               }.`}
             </a>
-          </span>
+          </span> */}
 
           <span className="pt-1 text-center text-sm">
-            <span className="text-accents-7">Don't have an account?</span>
-            {' '}
+            <span className="text-accents-7">Don't have an account?</span>{' '}
             <Link href="/signup">
               <a className="text-accent-9 font-bold hover:underline cursor-pointer">
                 Sign up.
@@ -145,7 +144,7 @@ const SignIn = () => {
           </span>
         </div>
 
-        <div className="flex items-center my-6">
+        {/* <div className="flex items-center my-6">
           <div
             className="border-t border-accents-2 flex-grow mr-3"
             aria-hidden="true"
@@ -165,7 +164,7 @@ const SignIn = () => {
         >
           <GitHub />
           <span className="ml-2">Continue with GitHub</span>
-        </Button>
+        </Button> */}
       </div>
     )
   }
