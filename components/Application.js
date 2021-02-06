@@ -10,8 +10,6 @@ import { isEmpty } from 'lodash'
 
 export default function Application ({ app }) {
   const [loading] = useState(false)
-  const [editMode, setEditMode] = useState(false)
-  const [name, setName] = useState('')
   const router = useRouter()
   const {
     session,
@@ -25,10 +23,6 @@ export default function Application ({ app }) {
     await updateApplication({ id: app.id, enabled: e })
   }
 
-  const updateAppName = async () => {
-    await updateApplication({ id: app.id, name })
-  }
-
   const deleteApp = async () => {
     await deleteApplication(app.id)
     router.back()
@@ -39,35 +33,7 @@ export default function Application ({ app }) {
       <Subnav app={app} />
       {!isEmpty(app) && (
         <div className="max-w-6xl mx-auto py-2 px-4 sm:px-6 lg:px-8">
-          <div className="sm:flex sm:flex-col">
-            <div className="flex">
-              {!editMode
-                ? (
-                <h1 className="text-5xl font-extrabold text-white">
-                  {name || app.name}
-                </h1>
-                  )
-                : (
-                <Input
-                  type="text"
-                  defaultValue={name || app.name}
-                  onChange={setName}
-                />
-                  )}
-              <button
-                className="mx-2 p-1"
-                onClick={() => {
-                  if (editMode) updateAppName()
-                  setEditMode(!editMode)
-                }}
-              >
-                <i className="fas fa-edit p-2 text-gray-600 hover:text-gray-200 transform duration-200 ease-in-out"></i>
-              </button>
-            </div>
-            <p className="mt-5 text-xl text-accents-6 sm:text-center sm:text-2xl max-w-2xl m-auto">
-              {app.provider}
-            </p>
-          </div>
+          <AppTitle app={app} />
           <div className="mt-12 space-y-4 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mx-0 xl:grid-cols-4">
             {app.events &&
               app.events.map((event) => {
@@ -146,5 +112,47 @@ export default function Application ({ app }) {
         </div>
       )}
     </section>
+  )
+}
+
+const AppTitle = ({ app }) => {
+  const [editMode, setEditMode] = useState(false)
+  const [name, setName] = useState('')
+  const { updateApplication } = useUser()
+
+  const updateAppName = async () => {
+    await updateApplication({ id: app.id, name })
+  }
+
+  return (
+    <div className="sm:flex sm:flex-col">
+      <div className="flex">
+        {!editMode
+          ? (
+          <h1 className="text-5xl font-extrabold text-white">
+            {name || app.name}
+          </h1>
+            )
+          : (
+          <Input
+            type="text"
+            defaultValue={name || app.name}
+            onChange={setName}
+          />
+            )}
+        <button
+          className="mx-2 p-1"
+          onClick={() => {
+            if (editMode) updateAppName()
+            setEditMode(!editMode)
+          }}
+        >
+          <i className="fas fa-edit p-2 text-gray-600 hover:text-gray-200 transform duration-200 ease-in-out"></i>
+        </button>
+      </div>
+      <p className="mt-5 text-xl text-accents-6 sm:text-center sm:text-2xl max-w-2xl m-auto">
+        {app.provider}
+      </p>
+    </div>
   )
 }
