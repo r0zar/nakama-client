@@ -73,7 +73,7 @@ export default function Footer () {
       <div className="py-12 flex flex-col md:flex-row justify-between items-center space-y-4 bg-primary-2">
         <div>
           <span>
-            &copy; 2020
+            &copy; 2020{' '}
             <a
               href="https://pointblankdev.com"
               target="_blank"
@@ -81,7 +81,10 @@ export default function Footer () {
             >
               Point Blank Dev LLC
             </a>
-            . All rights reserved.
+            . All rights reserved. Created by{' '}
+            <a href="https://rossragsdale.com" target="_blank" rel="noreferrer">
+              Ross Ragsdale
+            </a>
           </span>
         </div>
       </div>
