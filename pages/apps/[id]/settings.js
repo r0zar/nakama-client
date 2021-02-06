@@ -1,4 +1,4 @@
-import Application from '../../../components/Application'
+import Settings from '../../../components/Settings'
 import { useUser } from '../../../components/UserContext'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
@@ -14,5 +14,5 @@ export default function AppDetailPage () {
       })
     }
   }, [router.query.id])
-  return <Application app={app} />
+  return <Settings app={app} />
 }

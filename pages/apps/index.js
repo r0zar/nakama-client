@@ -1,4 +1,3 @@
-import { supabase } from '../../utils/initSupabase'
 import Applications from '../../components/Applications'
 import { useUser } from '../../components/UserContext'
 import { useEffect, useState } from 'react'
@@ -12,17 +11,4 @@ export default function AppsPage () {
     })
   }, [])
   return <Applications apps={apps} />
-}
-
-export async function getServerSideProps () {
-  const { data: apps, error } = await supabase.from('applications').select('*')
-  if (error) console.error(error.message)
-
-  return {
-    props: {
-      apps: apps ?? []
-    }
-    // Refetch and rebuild pricing page every minute.
-    // revalidate: 60
-  }
 }

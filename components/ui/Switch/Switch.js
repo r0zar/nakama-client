@@ -2,7 +2,7 @@ import cn from 'classnames'
 import s from './Switch.module.css'
 import React from 'react'
 
-const Switch = ({ onChange, defaultChecked = false }) => {
+const Switch = ({ onChange, defaultChecked }) => {
   const [checked, setChecked] = React.useState(defaultChecked)
   const toggle = () => {
     if (onChange) onChange(!checked)

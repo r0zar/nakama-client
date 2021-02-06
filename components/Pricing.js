@@ -80,9 +80,8 @@ export default function Pricing ({ products }) {
           <h1 className="text-4xl font-extrabold text-white sm:text-center sm:text-6xl z-10">
             Pricing Plans
           </h1>
-          <p className="mt-5 text-xl text-accents-6 sm:text-center sm:text-2xl max-w-2xl m-auto z-10">
-            Subscribe to get started with serverless websockets. Larger plans
-            have higher websocket usage quotas.
+          <p className="mt-5 text-xl text-accents-6 sm:text-center sm:text-2xl max-w-2xl m-auto z-10 font-light">
+            Subscribe to get started with serverless websockets.
           </p>
           <div className="relative self-center mt-6 bg-primary-2 rounded-lg p-0.5 flex sm:mt-8 border border-accents-0 z-10">
             <button

@@ -1,14 +1,11 @@
 import cn from 'classnames'
-import { Router, useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { postData } from '../utils/helpers'
-import { getStripe } from '../utils/initStripejs'
 import { useUser } from '../components/UserContext'
 import Button from './ui/Button'
 
 export default function Applications ({ apps }) {
-  const [billingInterval, setBillingInterval] = useState('month')
-  const [loading, setLoading] = useState(false)
+  const [loading] = useState(false)
   const router = useRouter()
   const { session, userLoaded, subscription, createApplication } = useUser()
 
@@ -32,7 +29,7 @@ export default function Applications ({ apps }) {
           <h1 className="text-4xl font-extrabold text-white sm:text-center sm:text-6xl">
             Applications
           </h1>
-          <p className="mt-5 text-xl text-accents-6 sm:text-center sm:text-2xl max-w-2xl m-auto">
+          <p className="mt-5 text-xl text-accents-6 sm:text-center sm:text-2xl max-w-2xl m-auto font-light">
             Create an app to work with serverless websockets.
           </p>
         </div>
