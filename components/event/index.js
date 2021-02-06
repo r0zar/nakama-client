@@ -21,13 +21,14 @@ export default function Event ({ event }) {
   }
 
   return (
-    <section className="bg-black">
+    <div className="bg-black">
+      <Subnav app={{ id: event.application_id }} />
       <div className="max-w-6xl mx-auto py-8 sm:py-24 px-4 sm:px-6 lg:px-8">
         <Title event={event} />
         <Handler event={event} />
         <Controls event={event} />
       </div>
-    </section>
+    </div>
   )
 }
 
@@ -45,8 +46,7 @@ const Title = ({ event }) => {
   }
 
   return (
-    <div className="sm:flex sm:flex-col sm:align-center">
-      <Subnav app={{ id: event.application_id }} />
+    <section className="sm:flex sm:flex-col sm:align-center">
       <div className="flex justify-center">
         {!editMode
           ? (
@@ -77,6 +77,6 @@ const Title = ({ event }) => {
         </div>
         <p className="m-1 font-fine text-accents-6">{event.description}</p>
       </div>
-    </div>
+    </section>
   )
 }
