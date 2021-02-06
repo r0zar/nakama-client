@@ -7,7 +7,7 @@ const About = () => {
   `
   const text3 = `
     Creating a persistent connection to a web socket host requires a server to run 24/7.
-    I looked for a no-code solution for this problem I didn't find out, so I build one.
+    I looked for a no-code solution for this problem I couldn't find one- so I build it.
   `
   const text4 = `    
     Give handle.events a try and let me know what you think. 
