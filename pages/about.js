@@ -12,10 +12,10 @@ const About = () => {
   const text4 = `    
     Give handle.events a try and let me know what you think. 
     I'm working to more web socket hosts and event handlers. 
-    If you have any suggestions, I'd love to hear them!
+    If you have any suggestions, I'd love to hear them.
   `
   const text5 = `
-    Thank you!
+    Thanks.
   `
   return (
     <div className="w-auto p-3 max-w-2xl m-auto my-64">
@@ -25,7 +25,7 @@ const About = () => {
         <p className="font-fine my-2">{text2}</p>
         <p className="font-fine my-2">{text3}</p>
         <p className="font-fine my-2">{text4}</p>
-        <p className="font-thin text-lg my-2">{text5}</p>
+        <p className="font-thin text-xl my-2">{text5}</p>
       </div>
     </div>
   )
