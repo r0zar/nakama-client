@@ -1,6 +1,6 @@
 const About = () => {
   const text1 = `
-    Hi I'm Ross 👋
+    Hi, I'm Ross 👋
   `
   const text2 = `
     handle.events has a simple mission to make working with web sockets more accessible.
@@ -21,7 +21,7 @@ const About = () => {
     <div className="w-auto p-3 max-w-2xl m-auto my-64">
       <div className="flex flex-col justify-center pb-12 ">
         <h1 className="text-2xl my-4">About</h1>
-        <p className="font-thin text-4xl my-4">{text1}</p>
+        <p className="font-thin text-5xl my-4">{text1}</p>
         <p className="font-fine my-1">{text2}</p>
         <p className="font-fine my-1">{text3}</p>
         <p className="font-fine my-1">{text4}</p>
