@@ -14,7 +14,7 @@ export default function Application ({ app }) {
   const { createEvent } = useUser()
 
   return (
-    <section className="bg-black">
+    <div className="bg-black">
       <Subnav app={app} />
       {!isEmpty(app) && (
         <div className="max-w-6xl mx-auto py-2 px-4 sm:px-6 lg:px-8">
@@ -59,7 +59,7 @@ export default function Application ({ app }) {
           <Controls app={app} />
         </div>
       )}
-    </section>
+    </div>
   )
 }
 

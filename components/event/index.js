@@ -4,6 +4,7 @@ import Input from '../ui/Input'
 import Controls from './Controls'
 import Handler from './Handler'
 import Webhook from '../icons/Webhook'
+import Subnav from '../ui/Subnav'
 
 export default function Event ({ event }) {
   if (!event) {
@@ -45,6 +46,7 @@ const Title = ({ event }) => {
 
   return (
     <div className="sm:flex sm:flex-col sm:align-center">
+      <Subnav app={{ id: event.application_id }} />
       <div className="flex justify-center">
         {!editMode
           ? (
