@@ -22,7 +22,7 @@ const About = () => {
   return (
     <div className="w-auto p-3 max-w-2xl m-auto my-64">
       <div className="flex flex-col justify-center pb-12 ">
-        <h1 className="text-2xl my-4">Privacy Policy</h1>
+        <h1 className="text-2xl my-4">About</h1>
         <p>{text1}</p>
         <p>{text2}</p>
         <p>{text3}</p>
