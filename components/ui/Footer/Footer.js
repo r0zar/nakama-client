@@ -72,7 +72,17 @@ export default function Footer () {
       </div>
       <div className="py-12 flex flex-col md:flex-row justify-between items-center space-y-4 bg-primary-2">
         <div>
-          <span>&copy; 2020 Point Blank Dev LLC. All rights reserved.</span>
+          <span>
+            &copy; 2020
+            <a
+              href="https://pointblankdev.com"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Point Blank Dev LLC
+            </a>
+            . All rights reserved.
+          </span>
         </div>
       </div>
     </footer>
