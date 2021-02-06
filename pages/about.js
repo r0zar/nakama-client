@@ -16,17 +16,16 @@ const About = () => {
     so if you have any suggestions, I'd love to hear them!
   `
   const text5 = `
-    Thanks,
-    Ross Ragsdale
+    Thank you!
   `
   return (
     <div className="w-auto p-3 max-w-2xl m-auto my-64">
       <div className="flex flex-col justify-center pb-12 ">
         <h1 className="text-2xl my-4">About</h1>
-        <p>{text1}</p>
-        <p>{text2}</p>
-        <p>{text3}</p>
-        <p>{text4}</p>
+        <p className="text-lg">{text1}</p>
+        <p className="font-fine">{text2}</p>
+        <p className="font-fine">{text3}</p>
+        <p className="font-fine">{text4}</p>
         <p>{text5}</p>
       </div>
     </div>
