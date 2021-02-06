@@ -3,7 +3,7 @@ const About = () => {
     Hi I'm Ross 👋
   `
   const text2 = `
-    handle.events has a simple mission to make working with websockets more accessable.
+    handle.events has a simple mission to make working with websockets more accessible.
   `
   const text3 = `
     Creating a persistant connection to a websocket host requires a server to run 24/7,
@@ -22,11 +22,11 @@ const About = () => {
     <div className="w-auto p-3 max-w-2xl m-auto my-64">
       <div className="flex flex-col justify-center pb-12 ">
         <h1 className="text-2xl my-4">About</h1>
-        <p className="text-lg m-1">{text1}</p>
-        <p className="font-fine m-1">{text2}</p>
-        <p className="font-fine m-1">{text3}</p>
-        <p className="font-fine m-1">{text4}</p>
-        <p className="m-1">{text5}</p>
+        <p className="font-fine text-lg m-1">{text1}</p>
+        <p className="font-thin m-1">{text2}</p>
+        <p className="font-thin m-1">{text3}</p>
+        <p className="font-thin m-1">{text4}</p>
+        <p className="font-fine m-1">{text5}</p>
       </div>
     </div>
   )
