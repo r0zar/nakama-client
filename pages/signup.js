@@ -1,30 +1,30 @@
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { supabase } from '../utils/initSupabase';
-import { useUser } from '../components/UserContext';
-import Input from '../components/ui/Input';
-import Button from '../components/ui/Button';
-import Logo from '../components/icons/Logo';
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
+import { supabase } from '../utils/initSupabase'
+import { useUser } from '../components/UserContext'
+import Input from '../components/ui/Input'
+import Button from '../components/ui/Button'
+import Logo from '../components/icons/Logo'
 
 const SignUp = () => {
-  const [user, setUser] = useState(null);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState({ type: '', content: '' });
-  const router = useRouter();
-  const { signUp } = useUser();
+  const [user, setUser] = useState(null)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [name, setName] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [message, setMessage] = useState({ type: '', content: '' })
+  const router = useRouter()
+  const { signUp } = useUser()
 
   const handleSignup = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    setLoading(true);
-    setMessage({});
-    const { error, user } = await signUp({ email, password });
+    setLoading(true)
+    setMessage({})
+    const { error, user } = await signUp({ email, password })
     if (error) {
-      setMessage({ type: 'error', content: error.message });
+      setMessage({ type: 'error', content: error.message })
     } else {
       if (user) {
         await supabase
@@ -32,23 +32,23 @@ const SignUp = () => {
           .update({
             full_name: name
           })
-          .eq('id', user.id);
-        setUser(user);
+          .eq('id', user.id)
+        setUser(user)
       } else {
         setMessage({
           type: 'note',
           content: 'Check your email for the confirmation link.'
-        });
+        })
       }
     }
-    setLoading(false);
-  };
+    setLoading(false)
+  }
 
   useEffect(() => {
     if (user) {
-      router.replace('/account');
+      router.replace('/account')
     }
-  }, [user]);
+  }, [user])
 
   return (
     <form
@@ -86,7 +86,7 @@ const SignUp = () => {
 
         <span className="pt-1 text-center text-sm">
           <span className="text-accents-7">Do you have an account?</span>
-          {` `}
+          {' '}
           <Link href="/signin">
             <a className="text-accent-9 font-bold hover:underline cursor-pointer">
               Sign in.
@@ -95,7 +95,7 @@ const SignUp = () => {
         </span>
       </div>
     </form>
-  );
-};
+  )
+}
 
-export default SignUp;
+export default SignUp
