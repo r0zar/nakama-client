@@ -75,7 +75,7 @@ const Title = ({ event }) => {
         <div className="m-1">
           <Webhook size={24} />
         </div>
-        <p className="m-1 font-fine text-accents-6">{event.description}</p>
+        <p className="m-1 font-fine text-accents-6">{event.handler}</p>
       </div>
     </section>
   )

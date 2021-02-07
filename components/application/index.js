@@ -73,7 +73,7 @@ const EventCard = ({ event }) => {
           <div className="m-1">
             <Webhook size={18} />
           </div>
-          <div className="font-fine">{event.description}</div>
+          <div className="font-fine">{event.handler}</div>
         </div>
         <Button
           variant="slim"
