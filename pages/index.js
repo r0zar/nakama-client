@@ -1,6 +1,8 @@
 import { supabase } from '../utils/initSupabase'
 import Pricing from '../components/Pricing'
 
+const testMode = process.env.ENV === 'localhost'
+
 export default function PricingPage ({ products }) {
   return <Pricing products={products} />
 }
@@ -11,6 +13,7 @@ export async function getStaticProps () {
     .from('products')
     .select('*, prices(*)')
     .eq('active', true)
+    .eq('test', testMode)
     .eq('prices.active', true)
     .order('metadata->index')
     .order('unit_amount', { foreignTable: 'prices' })
