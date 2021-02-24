@@ -14,10 +14,22 @@ export const UserContextProvider = (props) => {
   useEffect(() => {
     const session = supabase.auth.session()
     setSession(session)
+    session &&
+      fetch('/api/session', {
+        headers: {
+          Authorization: 'Bearer ' + session.access_token
+        }
+      }).then((r) => r.json())
     setUser(session?.user ?? null)
     const { data: authListener } = supabase.auth.onAuthStateChange(
       async (event, session) => {
         setSession(session)
+        session &&
+          fetch('/api/session', {
+            headers: {
+              Authorization: 'Bearer ' + session.access_token
+            }
+          }).then((r) => r.json())
         setUser(session?.user ?? null)
       }
     )

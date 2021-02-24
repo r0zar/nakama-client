@@ -12,12 +12,15 @@
     "build:storybook": "yarn build-storybook -o docs"
   },
   "dependencies": {
+    "@hapi/iron": "^6.0.0",
     "@stripe/stripe-js": "^1.11.0",
     "@supabase/supabase-js": "^1.2.1",
     "@tailwindcss/postcss7-compat": "^2.0.3",
     "@types/lodash": "^4.14.168",
     "autoprefixer": "^9",
     "classnames": "^2.2.6",
+    "cookie": "^0.4.1",
+    "jsonwebtoken": "^8.5.1",
     "next": "10.0.5",
     "postcss": "^7",
     "react": "^17.0.1",
